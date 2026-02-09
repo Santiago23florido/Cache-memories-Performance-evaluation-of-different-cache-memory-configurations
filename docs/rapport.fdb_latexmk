@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1770646513.57936 "/home/santiago/archmic/Tp4/docs/rapport.tex" "rapport.pdf" "rapport" 1770646513.9963 0
+["pdflatex"] 1770657961.17867 "/home/santiago/archmic/Tp4/docs/rapport.tex" "rapport.pdf" "rapport" 1770657961.60058 0
   "/etc/texmf/web2c/texmf.cnf" 1762418151.39241 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/santiago/archmic/Tp4/docs/rapport.tex" 1770646513.31995 1983 089188e28e264d645bc7d5b0044eed23 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -31,6 +31,8 @@
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm" 1136768653 1124 6c73e740cf17375f03eec0ee63599741 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm" 1136768653 1116 933a60c408fc0a863a92debe84b2d294 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm" 1136768653 1120 8b7d695260f3cff42e636090a8002094 ""
+  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
+  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb" 1136849748 44729 811d6c62865936705a31c797a1d5dada ""
   "/usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb" 1136849748 44656 0cbca70e0534538582128f6b54593cca ""
   "/usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb" 1136849748 46026 6dab18b61c907687b520c72847215a68 ""
@@ -75,9 +77,9 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1762418170.6716 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1762418224 8214723 66b18d21e2ef1ecd23d5c483e8c60b4e ""
-  "rapport.aux" 1770646513.96104 802 5c7825c7cce3cafb5df98b3abdf6c643 "pdflatex"
+  "rapport.aux" 1770657961.5544 802 5c7825c7cce3cafb5df98b3abdf6c643 "pdflatex"
   "rapport.tex" 1770646513.31995 1983 089188e28e264d645bc7d5b0044eed23 ""
-  "sections/profiling.tex" 1770646488.3189 2994 936ab3b46f0a97d6905750b32557f348 ""
+  "sections/profiling.tex" 1770657960.97795 3651 4ca78d5059e4d52e55ae3eb2a8773187 ""
   (generated)
   "rapport.aux"
   "rapport.log"

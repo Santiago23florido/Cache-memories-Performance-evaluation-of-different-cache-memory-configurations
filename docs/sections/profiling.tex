@@ -68,3 +68,9 @@ Calcul flottant (Fp) & 0 [0.0] & 0 [0.0] \\
 }
 \caption{Blowfish (Cortex-A7 vs Cortex-A15).}
 \end{table}
+
+Le \emph{profiling} montre que le calcul entier domine dans tous les cas : \(\approx 60\,\%\) pour Dijkstra et \(\approx 72\,\%\) pour Blowfish. 
+Ainsi, un processeur doté de davantage d’ALU pour paralléliser ces opérations pourrait offrir un gain notable. 
+De plus, une restructuration des boucles afin de réduire les branchements, également significatifs, pourrait améliorer les performances. 
+Enfin, l’optimisation des accès mémoire (notamment la localité et les accès contigus) est pertinente, car les \emph{loads} dépassent \(20\,\%\). 
+Ces constats orientent directement les choix de micro-architecture et d’optimisation logicielle.
