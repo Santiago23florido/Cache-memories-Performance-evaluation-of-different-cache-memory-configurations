@@ -1,162 +1,67 @@
-# Targets
-# make          - twidle the options yourself :-)
-# make cc       - standard cc options
-# make gcc      - standard gcc options
-# make x86-elf  - linux-elf etc
-# make x86-out  - linux-a.out, FreeBSD etc
-# make x86-solaris
-# make x86-bdsi
+# Makefile Blowfish — RISC-V (gem5 SE)
 
-# use BF_PTR2 for intel boxes,
-# BF_PTR for sparc and MIPS/SGI
-# use nothing for Alpha and HP.
+# ---------- TOOLCHAIN ----------
+CC     = riscv64-linux-gnu-gcc
+AR     = riscv64-linux-gnu-ar
+RANLIB = riscv64-linux-gnu-ranlib
 
-# There are 3 possible performance options, experiment :-)
-#OPTS= -DBF_PTR  # usr for sparc and MIPS/SGI
-#OPTS= -DBF_PTR2 # use for pentium
-OPTS=		 # use for pentium pro, Alpha and HP
 
-MAKE=make -f Makefile
-#CC=cc
-#CFLAG= -O
+# Options perf
+#OPTS= -DBF_PTR
+#OPTS= -DBF_PTR2
+OPTS=
 
-CC ?= sslittle-na-sstrix-gcc
-AR ?= sslittle-na-sstrix-ar
-RANLIB ?= sslittle-na-sstrix-ranlib
-CFLAG ?= -static -O3 -fomit-frame-pointer
+# Gem5 SE: statique conseillé (RISC-V 64)
+CFLAG  = -static -O3 -fomit-frame-pointer -Wall -std=c99 \
+         -fno-pie -no-pie \
+         -march=rv64gc -mabi=lp64d \
+         -fno-builtin -fno-asynchronous-unwind-tables -fno-unwind-tables
+CFLAGS = $(OPTS) $(CFLAG)
 
-CFLAGS=$(OPTS) $(CFLAG)
-CPP=$(CC) -E
-AS=as
+# Assembler version: on force la version C (pas les asm x86)
+BF_ENC = bf_enc.o
 
-# Assember version of bf_encrypt().
-BF_ENC=bf_enc.o		# normal C version
-#BF_ENC=asm/bx86-elf.o	# elf format x86
-#BF_ENC=asm/bx86-out.o	# a.out format x86
-#BF_ENC=asm/bx86-sol.o	# solaris format x86 
-#BF_ENC=asm/bx86bsdi.o	# bsdi format x86 
+LIBOBJ = bf_skey.o bf_ecb.o $(BF_ENC) bf_cbc.o bf_cfb64.o bf_ofb64.o
+LIBSRC = bf_skey.c bf_ecb.c bf_enc.c bf_cbc.c bf_cfb64.c bf_ofb64.c
+HEADERS= bf_locl.h blowfish.h bf_pi.h
 
-LIBDIR=/usr/local/lib
-BINDIR=/usr/local/bin
-INCDIR=/usr/local/include
-MANDIR=/usr/local/man
-MAN1=1
-MAN3=3
-SHELL=/bin/sh
-LIBOBJ=bf_skey.o bf_ecb.o $(BF_ENC) bf_cbc.o bf_cfb64.o bf_ofb64.o
-LIBSRC=bf_skey.c bf_ecb.c bf_enc.c bf_cbc.c bf_cfb64.c bf_ofb64.c
+BLIB   = libblowfish.a
 
-GENERAL=Makefile Makefile.ssl Makefile.uni asm bf_locl.org README \
-	COPYRIGHT INSTALL blowfish.doc
+TARGET = bf.riscv
 
-TESTING=    bftest bfspeed bf
-TESTING_SRC=bftest.c bfspeed.c bf.c
-HEADERS=bf_locl.h blowfish.h bf_pi.h
+# Optionnel: outils de test en RISC-V
+TEST_BINS = bftest.riscv bfspeed.riscv
 
-ALL=	$(GENERAL) $(TESTING_SRC) $(LIBSRC) $(HEADERS)
+all: $(BLIB) $(TARGET)
 
-BLIB=	libblowfish.a
-
-all: $(BLIB) $(TESTING)
-
-cc:
-	$(MAKE) CC=cc CFLAGS="-O $(OPTS) $(CFLAG)" all
-
-gcc:
-	$(MAKE) CC=gcc CFLAGS="-O3 -fomit-frame-pointer $(OPTS) $(CFLAG)" all
-
-x86-elf:
-	$(MAKE) BF_ENC='asm/bx86-elf.o' CC=$(CC) CFLAGS="-DELF $(OPTS) $(CFLAG)" all
-
-x86-out:
-	$(MAKE) BF_ENC='asm/bx86-out.o' CC=$(CC) CFLAGS="-DOUT $(OPTS) $(CFLAG)" all
-
-x86-solaris:
-	$(MAKE) BF_ENC='asm/bx86-sol.o' CC=$(CC) CFLAGS="-DSOL $(OPTS) $(CFLAG)" all
-
-x86-bsdi:
-	$(MAKE) BF_ENC='asm/bx86bsdi.o' CC=$(CC) CFLAGS="-DBSDI $(OPTS) $(CFLAG)" all
-
-# elf
-asm/bx86-elf.o: asm/bx86-cpp.s asm/bx86unix.cpp
-	$(CPP) -DELF asm/bx86unix.cpp | $(AS) -o asm/bx86-elf.o
-
-# solaris
-asm/bx86-sol.o: asm/bx86-cpp.s asm/bx86unix.cpp
-	$(CC) -E -DSOL asm/bx86unix.cpp | sed 's/^#.*//' > asm/bx86-sol.s
-	as -o asm/bx86-sol.o asm/bx86-sol.s
-	rm -f asm/bx86-sol.s
-
-# a.out
-asm/bx86-out.o: asm/bx86-cpp.s asm/bx86unix.cpp
-	$(CPP) -DOUT asm/bx86unix.cpp | $(AS) -o asm/bx86-out.o
-
-# bsdi
-asm/bx86bsdi.o: asm/bx86-cpp.s asm/bx86unix.cpp
-	$(CPP) -DBSDI asm/bx86unix.cpp | $(AS) -o asm/bx86bsdi.o
-
-test:	all
-	./bftest
-
+# -------- Library --------
 $(BLIB): $(LIBOBJ)
 	/bin/rm -f $(BLIB)
 	$(AR) cr $(BLIB) $(LIBOBJ)
-	-$(RANLIB) $(BLIB)
+	$(RANLIB) $(BLIB)
 
-bf: bf.o $(BLIB)
-	$(CC) $(CFLAGS) -o bf bf.o $(BLIB)
+# -------- Main binary --------
+$(TARGET): bf.o $(BLIB)
+	$(CC) $(CFLAGS) -o $(TARGET) bf.o $(BLIB)
 
-bftest: bftest.o $(BLIB)
-	$(CC) $(CFLAGS) -o bftest bftest.o $(BLIB)
+# -------- Optional test binaries --------
+bftest.riscv: bftest.o $(BLIB)
+	$(CC) $(CFLAGS) -o $@ bftest.o $(BLIB)
 
-bfspeed: bfspeed.o $(BLIB)
-	$(CC) $(CFLAGS) -o bfspeed bfspeed.o $(BLIB)
+bfspeed.riscv: bfspeed.o $(BLIB)
+	$(CC) $(CFLAGS) -o $@ bfspeed.o $(BLIB)
 
-tags:
-	ctags $(TESTING_SRC) $(LIBBF)
+tests: $(BLIB) $(TEST_BINS)
 
-tar:
-	tar chf libbf.tar $(ALL)
+# -------- Generic compile rules --------
+%.o: %.c $(HEADERS) Makefile
+	$(CC) $(CFLAGS) -c $< -o $@
 
-shar:
-	shar $(ALL) >libbf.shar
-
-depend:
-	makedepend $(LIBBF) $(TESTING_SRC)
+check: all
+	file $(TARGET) $(TEST_BINS) 2>/dev/null || true
 
 clean:
-	/bin/rm -f *.o tags core $(TESTING) $(BLIB) .nfs* *.old *.bak asm/*.o output*
+	/bin/rm -f *.o core tags $(TARGET) $(TEST_BINS) $(BLIB) .nfs* *.old *.bak output*
+	/bin/rm -f asm/*.o
 
-dclean:
-	sed -e '/^# DO NOT DELETE THIS LINE/ q' Makefile >Makefile.new
-	mv -f Makefile.new Makefile
-
-# Eric is probably going to choke when he next looks at this --tjh
-install: $(BLIB)
-	if test $(INSTALLTOP); then \
-	    echo SSL style install; \
-	    cp $(BLIB) $(INSTALLTOP)/lib; \
-	    if test -s /bin/ranlib; then \
-	        /bin/ranlib $(INSTALLTOP)/lib/$(BLIB); \
-	    else \
-		if test -s /usr/bin/ranlib; then \
-		/usr/bin/ranlib $(INSTALLTOP)/lib/$(BLIB); \
-	    fi; fi; \
-	    chmod 644 $(INSTALLTOP)/lib/$(BLIB); \
-	    cp blowfish.h $(INSTALLTOP)/include; \
-	    chmod 644 $(INSTALLTOP)/include/blowfish.h; \
-	else \
-	    echo Standalone install; \
-	    cp $(BLIB) $(LIBDIR)/$(BLIB); \
-	    if test -s /bin/ranlib; then \
-	      /bin/ranlib $(LIBDIR)/$(BLIB); \
-	    else \
-	      if test -s /usr/bin/ranlib; then \
-		/usr/bin/ranlib $(LIBDIR)/$(BLIB); \
-	      fi; \
-	    fi; \
-	    chmod 644 $(LIBDIR)/$(BLIB); \
-	    cp blowfish.h $(INCDIR)/blowfish.h; \
-	    chmod 644 $(INCDIR)/blowfish.h; \
-	fi
-# DO NOT DELETE THIS LINE -- make depend depends on it.
+.PHONY: all clean tests check

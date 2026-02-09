@@ -10,36 +10,29 @@
 ```bash
 cd /home/santiago/archmic/Tp4/blowfish
 make clean
-make CC=riscv64-linux-gnu-gcc AR=riscv64-linux-gnu-ar RANLIB=riscv64-linux-gnu-ranlib \
-  CFLAG="-O2 -static -fno-lto"
+make 
 ```
 
 **Cortex-A7 simulation**
 ```bash
 cd /home/santiago/archmic/Tp4/blowfish
-rm -rf m5out
-/home/santiago/archmic/gem5/build/RISCV/gem5.opt -d /home/santiago/archmic/Tp4/blowfish/m5out \
+rm -rf m5bfA7
+/home/santiago/archmic/gem5/build/RISCV/gem5.opt -d //home/santiago/archmic/Tp4/blowfish/m5bfA7 \
   /home/santiago/archmic/Tp4/CortexA7.py \
-  --cmd=/home/santiago/archmic/Tp4/blowfish/bf \
-  --options e /home/santiago/archmic/Tp4/blowfish/input_large.asc \
-     /home/santiago/archmic/Tp4/blowfish/output_large.enc \
-     1234567890abcdeffedcba0987654321
-
-grep -E "simInsts|numLoadInsts|numStoreInsts|numBranches|numIntInsts|numFpInsts" m5out/stats.txt
+  --cmd=/home/santiago/archmic/Tp4/blowfish/bf.riscv \
+  --options /home/santiago/archmic/Tp4/blowfish/input.dat
+grep -E '^system\.cpu\.executeStats[0-9]+\.(numInsts|numOps|ipc|cpi|numMemRefs|numLoadInsts|numStoreInsts|numBranches|numIntInsts|numFpInsts)\b' m5bfA7/stats.txt
 ```
 
 **Cortex-A15 simulation**
 ```bash
 cd /home/santiago/archmic/Tp4/blowfish
-rm -rf m5out
-/home/santiago/archmic/gem5/build/RISCV/gem5.opt -d /home/santiago/archmic/Tp4/blowfish/m5out \
+rm -rf m5bfA15
+/home/santiago/archmic/gem5/build/RISCV/gem5.opt -d //home/santiago/archmic/Tp4/blowfish/m5bfA15 \
   /home/santiago/archmic/Tp4/CortexA15.py \
-  --cmd=/home/santiago/archmic/Tp4/blowfish/bf \
-  --options e /home/santiago/archmic/Tp4/blowfish/input_large.asc \
-     /home/santiago/archmic/Tp4/blowfish/output_large.enc \
-     1234567890abcdeffedcba0987654321
-
-grep -E "simInsts|numLoadInsts|numStoreInsts|numBranches|numIntInsts|numFpInsts" m5out/stats.txt
+  --cmd=/home/santiago/archmic/Tp4/blowfish/bf.riscv \
+  --options /home/santiago/archmic/Tp4/blowfish/input.dat
+grep -E '^system\.cpu\.executeStats[0-9]+\.(numInsts|numOps|ipc|cpi|numMemRefs|numLoadInsts|numStoreInsts|numBranches|numIntInsts|numFpInsts)\b' m5bfA15/stats.txt
 ```
 
 Notes:

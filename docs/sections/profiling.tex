@@ -1,0 +1,70 @@
+\section{Profiling de l’application}
+
+Pour procéder à l’évaluation des configurations de cache pour chacun des algorithmes proposés et analyser leurs performances, il est proposé de réaliser un \emph{profiling} de l’application à l’aide du simulateur gem5. Le \emph{profiling} est essentiel, car il permet de quantifier des éléments du comportement du programme afin de prendre des décisions d’optimisation et de microconception architecturale fondées sur des données, principalement issues de la simulation \cite{Profiling}. Il permet également d’identifier des \emph{hotspots} sur lesquels concentrer la conception et l’optimisation, c’est-à-dire de cibler en priorité les composantes qui contribuent le plus au temps d’exécution. Enfin, il fournit une première approximation de la caractérisation de la charge de travail (\emph{workload}) d’un programme, ce qui facilite l’orientation des choix de conception.
+
+
+\begin{table}[h]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{l|c|c}
+\hline
+\textbf{Classe} & \textbf{Dijkstra large (A7)} & \textbf{Dijkstra large (A15)} \\
+\hline
+Lecture (Load) & 45\,516\,963 [28.4] & 45\,905\,506 [28.5] \\
+Écriture (Store) & 19\,439\,553 [12.1] & 19\,593\,718 [12.1] \\
+Branchement & 43\,904\,570 [21.5] & 44\,122\,872 [21.5] \\
+Calcul entier (Int) & 95\,334\,242 [59.5] & 95\,780\,142 [59.4] \\
+Calcul flottant (Fp) & 0 [0.0] & 0 [0.0] \\
+\hline
+\textbf{Total d’instructions exécutées} & \textbf{204\,195\,328} & \textbf{205\,402\,238} \\
+\hline
+\end{tabular}
+}
+\caption{Dijkstra large (Cortex-A7 vs Cortex-A15).}
+\end{table}
+
+\begin{table}[h]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{l|c|c}
+\hline
+\textbf{Classe} & \textbf{Dijkstra small (A7)} & \textbf{Dijkstra small (A15)} \\
+\hline
+Lecture (Load) & 10\,313\,882 [28.5] & 10\,474\,419 [28.5] \\
+Écriture (Store) & 4\,759\,916 [13.2] & 4\,850\,175 [13.2] \\
+Branchement & 9\,823\,729 [21.4] & 9\,978\,854 [21.4] \\
+Calcul entier (Int) & 21\,106\,947 [58.3] & 21\,363\,899 [58.2] \\
+Calcul flottant (Fp) & 0 [0.0] & 0 [0.0] \\
+\hline
+\textbf{Total d’instructions exécutées} & \textbf{46\,004\,474} & \textbf{46\,667\,347} \\
+\hline
+\end{tabular}
+}
+\caption{Dijkstra small (Cortex-A7 vs Cortex-A15).}
+\end{table}
+
+\begin{table}[h]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{l|c|c}
+\hline
+\textbf{Classe} & \textbf{Blowfish (A7)} & \textbf{Blowfish (A15)} \\
+\hline
+Lecture (Load) & 19\,141 [21.8] & 19\,769 [21.3] \\
+Écriture (Store) & 5\,516 [6.3] & 5\,671 [6.1] \\
+Branchement & 29\,760 [25.3] & 30\,060 [24.4] \\
+Calcul entier (Int) & 63\,342 [72.0] & 67\,560 [72.6] \\
+Calcul flottant (Fp) & 0 [0.0] & 0 [0.0] \\
+\hline
+\textbf{Total d’instructions exécutées} & \textbf{117\,759} & \textbf{123\,060} \\
+\hline
+\end{tabular}
+}
+\caption{Blowfish (Cortex-A7 vs Cortex-A15).}
+\end{table}
