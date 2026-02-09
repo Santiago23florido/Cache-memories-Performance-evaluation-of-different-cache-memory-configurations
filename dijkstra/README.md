@@ -58,3 +58,5 @@ Notes:
 - If you build with the RISC-V toolchain, the outputs are `dijkstra_large` and `dijkstra_small` (both RISC-V). Replace the `--cmd` path accordingly.
 - To run the small input, replace the binary with `dijkstra_small` (or build a `dijkstra_small.riscv`).
 - `CortexA7.py` and `CortexA15.py` already configure the CPU model and caches internally, so extra flags like `--cpu-type` or `--caches` are not supported.
+
+
