@@ -1,181 +1,142 @@
-# configs/example/se_fu.py
-#
-# Run a RISC-V SE workload on DerivO3CPU with a configurable functional-unit pool.
-#
-# Example:
-# build/RISCV/gem5.opt -d m5out \
-#   configs/example/se_fu.py --cmd=program.riscv --caches \
-#   --ialu=4 --imult=1 --fpalu=4 --fpmult=1 --memport=2
-print("SE_FU: script loaded")
+# -*- coding: utf-8 -*-
 
 import argparse
 import m5
-from m5.objects import (
-    System, Root, Process, SEWorkload,
-    SrcClockDomain, VoltageDomain, AddrRange,
-    DerivO3CPU, TimingSimpleCPU, MinorCPU,
-    SystemXBar, MemCtrl, DDR3_1600_8x8,
-    Cache, L2XBar,
-    FUPool, FUDesc, OpDesc
-)
+from m5.objects import *
 
-# ----------------------------
-# Minimal caches
-# ----------------------------
 class L1ICache(Cache):
-    size = "32kB"
-    assoc = 2
     tag_latency = 2
     data_latency = 2
     response_latency = 2
     mshrs = 4
     tgts_per_mshr = 8
     is_read_only = True
+    writeback_clean = True
+    def connectCPU(self, cpu): self.cpu_side = cpu.icache_port
+    def connectBus(self, bus): self.mem_side = bus.cpu_side_ports
 
 class L1DCache(Cache):
-    size = "32kB"
-    assoc = 2
     tag_latency = 2
     data_latency = 2
     response_latency = 2
     mshrs = 8
     tgts_per_mshr = 8
+    writeback_clean = True
+    def connectCPU(self, cpu): self.cpu_side = cpu.dcache_port
+    def connectBus(self, bus): self.mem_side = bus.cpu_side_ports
 
 class L2Cache(Cache):
-    size = "256kB"
-    assoc = 8
     tag_latency = 10
     data_latency = 10
     response_latency = 10
     mshrs = 16
     tgts_per_mshr = 12
+    writeback_clean = True
+    def connectCPUSideBus(self, bus): self.cpu_side = bus.mem_side_ports
+    def connectMemSideBus(self, bus): self.mem_side = bus.cpu_side_ports
 
-
-def build_fu_pool(ialu: int, imult: int, fpalu: int, fpmult: int, memport: int) -> FUPool:
-    """
-    Build FU pool for DerivO3CPU.
-    opClass names may vary across gem5 versions; adjust if your build errors.
-    """
-
-    class IntALU(FUDesc):
-        count = ialu
-        opList = [OpDesc(opClass="IntAlu", opLat=1)]
-
-    class IntMultDiv(FUDesc):
-        count = imult
-        opList = [
-            OpDesc(opClass="IntMult", opLat=3),
-            OpDesc(opClass="IntDiv",  opLat=12),
-        ]
-
-    class FPALU(FUDesc):
-        count = fpalu
-        opList = [
-            OpDesc(opClass="FloatAdd", opLat=2),
-            OpDesc(opClass="FloatCmp", opLat=2),
-            OpDesc(opClass="FloatCvt", opLat=2),
-        ]
-
-    class FPMultDiv(FUDesc):
-        count = fpmult
-        opList = [
-            OpDesc(opClass="FloatMult", opLat=4),
-            OpDesc(opClass="FloatDiv",  opLat=12),
-        ]
-
-    class MemPort(FUDesc):
-        count = memport
-        opList = [
-            OpDesc(opClass="MemRead",  opLat=1),
-            OpDesc(opClass="MemWrite", opLat=1),
-        ]
-
-    return FUPool(FUList=[IntALU(), IntMultDiv(), FPALU(), FPMultDiv(), MemPort()])
-
-
-def main():
+def parse_args():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--cmd", required=True, help="RISC-V binary to run (static recommended)")
-    ap.add_argument("--args", default="", help="Arguments to pass to program (single string)")
-    ap.add_argument("--cpu-type", choices=["O3", "TimingSimpleCPU", "MinorCPU"], default="O3")
-    ap.add_argument("--cpu-clock", default="1GHz")
-    ap.add_argument("--mem-size", default="8GB")
-    ap.add_argument("--caches", action="store_true", help="Enable simple private L1 + shared L2")
+    ap.add_argument("--cmd", required=True)
+    ap.add_argument("--options", nargs=argparse.REMAINDER, default=[])
+    ap.add_argument("--clock", default="2GHz")
+    ap.add_argument("--mem-size", default="2GB")
+    ap.add_argument("--maxinsts", type=int, default=0)
+    return ap.parse_args()
 
-    # FU knobs
-    ap.add_argument("--ialu", type=int, default=4)
-    ap.add_argument("--imult", type=int, default=1)
-    ap.add_argument("--fpalu", type=int, default=1)
-    ap.add_argument("--fpmult", type=int, default=1)
-    ap.add_argument("--memport", type=int, default=2)
-
-    args = ap.parse_args()
-
-    print("SE_FU: parsed args", args)
-
-
+def build_system(args):
     system = System()
-    system.clk_domain = SrcClockDomain(clock=args.cpu_clock, voltage_domain=VoltageDomain())
+    system.clk_domain = SrcClockDomain(clock=args.clock, voltage_domain=VoltageDomain())
     system.mem_mode = "timing"
     system.mem_ranges = [AddrRange(args.mem_size)]
 
-    # CPU
-    if args.cpu_type == "O3":
-        system.cpu = DerivO3CPU()
-        system.cpu.fuPool = build_fu_pool(args.ialu, args.imult, args.fpalu, args.fpmult, args.memport)
-    elif args.cpu_type == "Minor":
-        system.cpu = MinorCPU()
-    else:
-        system.cpu = TimingSimpleCPU()
+    # Cortex A7: blocs 32B
+    system.cache_line_size = 32
 
-    # Buses + memory
+    system.cpu = DerivO3CPU()
+
+    # IMPORTANT: O3 default fetch buffer = 64B dans certaines versions gem5.
+    # Avec des lignes de cache 32B, ca declenche le fatal "fetch buffer 64 > block 32".
+    system.cpu.fetchBufferSize = 32
+
+    # Fetch queue
+    system.cpu.fetchQueueSize = 8
+
+    # Decode / Issue / Commit : 2 / 4 / 2
+    system.cpu.decodeWidth  = 2
+    system.cpu.issueWidth   = 4
+    system.cpu.commitWidth  = 2
+
+    # Coherence autres largeurs
+    system.cpu.fetchWidth    = 2
+    system.cpu.renameWidth   = 4
+    system.cpu.dispatchWidth = 4
+    system.cpu.wbWidth       = 2
+
+    # RUU/LSQ : 2 / 8  (interpretation gem5: ROB=2, LQ=8, SQ=8)
+    system.cpu.numROBEntries = 2
+    system.cpu.LQEntries = 8
+    system.cpu.SQEntries = 8
+
+    # Branch predictor : bimodal, BTB=256
+    # BiModeBP correspond au "bimodal/bi-mode" cote gem5 classic.
+    system.cpu.branchPred = BiModeBP()
+    system.cpu.branchPred.BTBEntries = 256
+
+    # -------- Caches C-A7 --------
+    # I-L1: 32KB / 32 / 2
+    system.cpu.icache = L1ICache()
+    system.cpu.icache.size = "32kB"
+    system.cpu.icache.assoc = 2
+
+    # D-L1: 32KB / 32 / 2
+    system.cpu.dcache = L1DCache()
+    system.cpu.dcache.size = "32kB"
+    system.cpu.dcache.assoc = 2
+
+    # L2: 512KB / 32 / 8
+    system.l2bus = L2XBar()
+    system.l2cache = L2Cache()
+    system.l2cache.size = "512kB"
+    system.l2cache.assoc = 8
+
+    system.cpu.icache.connectCPU(system.cpu)
+    system.cpu.dcache.connectCPU(system.cpu)
+    system.cpu.icache.connectBus(system.l2bus)
+    system.cpu.dcache.connectBus(system.l2bus)
+    system.l2cache.connectCPUSideBus(system.l2bus)
+
     system.membus = SystemXBar()
+    system.l2cache.connectMemSideBus(system.membus)
     system.system_port = system.membus.cpu_side_ports
 
-    # Interrupts (important)
-    system.cpu.createInterruptController()
-
-    if args.caches:
-        system.cpu.icache = L1ICache()
-        system.cpu.dcache = L1DCache()
-        system.l2bus = L2XBar()
-        system.l2cache = L2Cache()
-
-        # CPU <-> L1
-        system.cpu.icache_port = system.cpu.icache.cpu_side
-        system.cpu.dcache_port = system.cpu.dcache.cpu_side
-
-        # L1 <-> L2 bus
-        system.cpu.icache.mem_side = system.l2bus.cpu_side_ports
-        system.cpu.dcache.mem_side = system.l2bus.cpu_side_ports
-
-        # L2 <-> buses
-        system.l2cache.cpu_side = system.l2bus.mem_side_ports
-        system.l2cache.mem_side = system.membus.cpu_side_ports
-    else:
-        # No caches: CPU directly to membus
-        system.cpu.icache_port = system.membus.cpu_side_ports
-        system.cpu.dcache_port = system.membus.cpu_side_ports
-
+    # DRAM
     system.mem_ctrl = MemCtrl()
     system.mem_ctrl.dram = DDR3_1600_8x8()
     system.mem_ctrl.dram.range = system.mem_ranges[0]
     system.mem_ctrl.port = system.membus.mem_side_ports
 
-    # Workload (SE)
-    system.workload = SEWorkload.init_compatible(args.cmd)
     process = Process()
-    process.cmd = [args.cmd] + (args.args.split() if args.args else [])
+    process.cmd = [args.cmd] + args.options
+    system.workload = SEWorkload.init_compatible(args.cmd)
     system.cpu.workload = process
     system.cpu.createThreads()
+    system.cpu.createInterruptController()
 
+    return system
+
+def main():
+    args = parse_args()
+    system = build_system(args)
     root = Root(full_system=False, system=system)
-    print("SE_FU: instantiating")
-
     m5.instantiate()
-    print("SE_FU: simulating")
 
-    exit_event = m5.simulate()
-    print(f"Exiting @ tick {m5.curTick()} because {exit_event.getCause()}")
+    if args.maxinsts > 0:
+        ev = m5.simulate(args.maxinsts)
+    else:
+        ev = m5.simulate()
+
+    m5.stats.dump()
+    print(f"Exiting @ tick {m5.curTick()} because {ev.getCause()}")
 
 main()
