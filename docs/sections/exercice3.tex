@@ -5,19 +5,22 @@ algorithmes de multiplication de matrices}
     \subsection{Paramètres de configuration des caches utilisés dans gem5}
     
         \begin{table}[h]
-            \begin{center}
-                \caption{}
+            \centering
+            \footnotesize
+            \setlength{\tabcolsep}{3pt}
+            \resizebox{\linewidth}{!}{%
                 \begin{tabular}{|c|c|c|c|c|}
                     \hline
                     \textbf{Configuration} & \textbf{Instruction cache}                                   & \textbf{Data cache}                                           & \textbf{L2 cache}                                              & \textbf{Block size} \\ \hline
                     C1                     & \begin{tabular}[c]{@{}c@{}}4KB \\ direct-mapped\end{tabular} & \begin{tabular}[c]{@{}c@{}}4KB \\ direct-mapped\end{tabular}  & \begin{tabular}[c]{@{}c@{}}32KB \\ direct-mapped\end{tabular}  & 32 bytes                          \\ \hline
                     C2                     & \begin{tabular}[c]{@{}c@{}}4KB \\ direct-mapped\end{tabular} & \begin{tabular}[c]{@{}c@{}}4KB \\ 2-way set-asso\end{tabular} & \begin{tabular}[c]{@{}c@{}}32KB \\ 4-way set-asso\end{tabular} & 32 bytes                         \\ \hline
                 \end{tabular}
-            \end{center}
+            }
+            \caption{}
         \end{table}
         
         Les paramètres de configuration des caches dans le simulateur gem5 suivent le format suivant :
-        : \texttt{tag:n\_lignes:taille\_bloc:associativité:politique}. 
+        {\footnotesize\texttt{tag:\allowbreak n\_lignes:\allowbreak taille\_bloc:\allowbreak associativite:\allowbreak politique}}.
         
         Pour chaque cache, le nombre de lignes est obtenu en divisant la taille totale du cache par la taille d’un bloc. 
         L’associativité correspond au nombre de voies, fixé à 1 pour un cache direct-mapped, 2 pour un cache 2-way set-associative, etc. Enfin, la politique de remplacement utilisée ici est LRU, notée \texttt{l}.
@@ -25,14 +28,15 @@ algorithmes de multiplication de matrices}
         Ainsi, pour la configuration C1, par exemple, le cache d'instructions possède \(\frac{4096}{32} = 128\) lignes, d'où \texttt{il1:128:32:1:l}. En utilisant la même logique pour les autres caches et configurations, le tableau suivant est rempli.
         
         \begin{table}[h]
-            \begin{center}
-                \begin{tabular}{|c|c|c|c|}
-                    \hline
-                    \textbf{Configuration} & \textbf{IL1}   & \textbf{DL1}   & \textbf{UL2}    \\ \hline
-                    C1                     & il1:128:32:1:l & dl1:128:32:1:l & ul2:1024:32:1:l \\ \hline
-                    C2                     & il1:128:32:1:l & dl1:64:32:2:l  & ul2:256:32:4:l  \\ \hline
-                \end{tabular}
-            \end{center}
+            \centering
+            \footnotesize
+            \setlength{\tabcolsep}{3pt}
+            \begin{tabular}{|c|c|c|c|}
+                \hline
+                \textbf{Configuration} & \textbf{IL1}   & \textbf{DL1}   & \textbf{UL2}    \\ \hline
+                C1                     & il1:128:32:1:l & dl1:128:32:1:l & ul2:1024:32:1:l \\ \hline
+                C2                     & il1:128:32:1:l & dl1:64:32:2:l  & ul2:256:32:4:l  \\ \hline
+            \end{tabular}
         \end{table}
     
     \subsection{Taux de défauts dans les différentes caches}
@@ -44,52 +48,55 @@ algorithmes de multiplication de matrices}
         \end{itemize}
         
         \begin{table}[h]
-            \begin{center}
-                \caption{icache.overallMissRate}
-                \label{tab:icache}
-                \begin{tabular}{|c|c|c|}
-                    \hline
-                    \multirow{2}{*}{\textbf{Programmes}} & \multicolumn{2}{c|}{\textbf{Configuration de caches}} \\ 
-                    \cline{2-3} 
-                                                            & C1       & C2             \\ \hline
-                    P1 normale                           & $ 0,00\%$         &  $ 0,00\%$    \\ \hline
-                    P2 (pointeur)                        & $ 0,00\ $         &  $ 0,00\%$   \\ \hline
-                    P3 (tempo)                           & $ 0,00\ $         &  $ 0,00\%$   \\ \hline
-                    P4 (unrol)                           & $ 0,00\ $         &  $ 0,00\%$   \\ \hline
-                \end{tabular}
-            \end{center}
+            \centering
+            \footnotesize
+            \setlength{\tabcolsep}{3pt}
+            \begin{tabular}{|c|c|c|}
+                \hline
+                \multirow{2}{*}{\textbf{Programmes}} & \multicolumn{2}{c|}{\textbf{Configuration de caches}} \\ 
+                \cline{2-3} 
+                                                        & C1       & C2             \\ \hline
+                P1 normale                           & $ 0,00\%$         &  $ 0,00\%$    \\ \hline
+                P2 (pointeur)                        & $ 0,00\%$         &  $ 0,00\%$   \\ \hline
+                P3 (tempo)                           & $ 0,00\%$         &  $ 0,00\%$   \\ \hline
+                P4 (unrol)                           & $ 0,00\%$         &  $ 0,00\%$   \\ \hline
+            \end{tabular}
+            \caption{icache.overallMissRate}
+            \label{tab:icache}
         \end{table}
         
         \begin{table}[h]
-            \begin{center}
-                \caption{dcache.overallMissRate}
-                \begin{tabular}{|c|c|c|}
-                    \hline
-                    \multirow{2}{*}{\textbf{Programmes}} & \multicolumn{2}{c|}{\textbf{Configuration de caches}} \\ 
-                    \cline{2-3} 
-                                                            & C1       & C2             \\ \hline
-                    P1 normale                           & $ 30,08\%$         &  $ 31,01\%$    \\ \hline
-                    P2 (pointeur)                        & $ 30,22\%$         &  $ 31,12\%$   \\ \hline
-                    P3 (tempo)                           & $ 30,23\%$         &  $ 31,12\%$   \\ \hline
-                    P4 (unrol)                           & $ 30,06\%$         &  $ 31,10\%$   \\ \hline
-                \end{tabular}
-            \end{center}
+            \centering
+            \footnotesize
+            \setlength{\tabcolsep}{3pt}
+            \begin{tabular}{|c|c|c|}
+                \hline
+                \multirow{2}{*}{\textbf{Programmes}} & \multicolumn{2}{c|}{\textbf{Configuration de caches}} \\ 
+                \cline{2-3} 
+                                                        & C1       & C2             \\ \hline
+                P1 normale                           & $ 30,08\%$         &  $ 31,01\%$    \\ \hline
+                P2 (pointeur)                        & $ 30,22\%$         &  $ 31,12\%$   \\ \hline
+                P3 (tempo)                           & $ 30,23\%$         &  $ 31,12\%$   \\ \hline
+                P4 (unrol)                           & $ 30,06\%$         &  $ 31,10\%$   \\ \hline
+            \end{tabular}
+            \caption{dcache.overallMissRate}
         \end{table}
         
         \begin{table}[h]
-            \begin{center}
-                \caption{l2cache.overallMissRate}
-                \begin{tabular}{|c|c|c|}
-                    \hline
-                    \multirow{2}{*}{\textbf{Programmes}} & \multicolumn{2}{c|}{\textbf{Configuration de caches}} \\ 
-                    \cline{2-3} 
-                                                            & C1       & C2             \\ \hline
-                    P1 normale                           & $ 43,85\%$         &  $ 42,20\%$    \\ \hline
-                    P2 (pointeur)                        & $ 43,63\%$         &  $ 42,21\%$   \\ \hline
-                    P3 (tempo)                           & $ 43,62\%$         &  $ 42,20\%$   \\ \hline
-                    P4 (unrol)                           & $ 43,65\%$         &  $ 42,02\%$   \\ \hline
-                \end{tabular}
-            \end{center}
+            \centering
+            \footnotesize
+            \setlength{\tabcolsep}{3pt}
+            \begin{tabular}{|c|c|c|}
+                \hline
+                \multirow{2}{*}{\textbf{Programmes}} & \multicolumn{2}{c|}{\textbf{Configuration de caches}} \\ 
+                \cline{2-3} 
+                                                        & C1       & C2             \\ \hline
+                P1 normale                           & $ 43,85\%$         &  $ 42,20\%$    \\ \hline
+                P2 (pointeur)                        & $ 43,63\%$         &  $ 42,21\%$   \\ \hline
+                P3 (tempo)                           & $ 43,62\%$         &  $ 42,20\%$   \\ \hline
+                P4 (unrol)                           & $ 43,65\%$         &  $ 42,02\%$   \\ \hline
+            \end{tabular}
+            \caption{l2cache.overallMissRate}
         \end{table}
 
         Nous pouvons vérifier que les quatre algorithmes présentent une bonne localité de référence pour le code. 
@@ -97,4 +104,3 @@ algorithmes de multiplication de matrices}
         pour les deux configurations de caches (Table \ref{tab:icache}). Cela signifie que le flux d’instructions 
         tient entièrement dans le cache d’instructions et que les boucles de multiplication de matrices réutilisent 
         toujours le même petit bloc de code, ce qui exploite très bien la localité spatiale et temporelle du code.
-

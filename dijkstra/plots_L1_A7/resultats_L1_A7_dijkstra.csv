@@ -1,0 +1,11 @@
+jeu_donnees,L1_taille,cpi,numCycles,dossier_sortie
+small,1kB,3.422121,157349270,/home/santiago/archmic/Tp4/dijkstra/runs_L1_A7/dijkstra_small_L1_1kB
+small,2kB,3.422121,157349270,/home/santiago/archmic/Tp4/dijkstra/runs_L1_A7/dijkstra_small_L1_2kB
+small,4kB,3.422121,157349270,/home/santiago/archmic/Tp4/dijkstra/runs_L1_A7/dijkstra_small_L1_4kB
+small,8kB,3.422121,157349270,/home/santiago/archmic/Tp4/dijkstra/runs_L1_A7/dijkstra_small_L1_8kB
+small,16kB,3.422121,157349270,/home/santiago/archmic/Tp4/dijkstra/runs_L1_A7/dijkstra_small_L1_16kB
+large,1kB,3.412551,696639679,/home/santiago/archmic/Tp4/dijkstra/runs_L1_A7/dijkstra_large_L1_1kB
+large,2kB,3.412551,696639679,/home/santiago/archmic/Tp4/dijkstra/runs_L1_A7/dijkstra_large_L1_2kB
+large,4kB,3.412551,696639679,/home/santiago/archmic/Tp4/dijkstra/runs_L1_A7/dijkstra_large_L1_4kB
+large,8kB,3.412551,696639679,/home/santiago/archmic/Tp4/dijkstra/runs_L1_A7/dijkstra_large_L1_8kB
+large,16kB,3.412551,696639679,/home/santiago/archmic/Tp4/dijkstra/runs_L1_A7/dijkstra_large_L1_16kB
