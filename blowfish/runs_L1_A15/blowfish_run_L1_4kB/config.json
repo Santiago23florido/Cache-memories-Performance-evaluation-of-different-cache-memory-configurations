@@ -949,8 +949,7 @@
                     "path": "system.cpu.workload",
                     "cmd": [
                         "/home/santiago/archmic/Tp4/blowfish/bf.riscv",
-                        "/home/santiago/archmic/Tp4/blowfish/input.dat",
-                        "--l1-size=4kB"
+                        "/home/santiago/archmic/Tp4/blowfish/input.dat"
                     ],
                     "cwd": "/home/santiago/archmic/Tp4/blowfish",
                     "drivers": [],
@@ -1021,7 +1020,7 @@
                 },
                 "response_latency": 2,
                 "sequential_access": false,
-                "size": 32768,
+                "size": 4096,
                 "system": "system",
                 "tag_latency": 2,
                 "tags": {
@@ -1042,7 +1041,7 @@
                         "assoc": 2,
                         "entry_size": 64,
                         "eventq_index": 0,
-                        "size": 32768
+                        "size": 4096
                     },
                     "power_model": [],
                     "power_state": {
@@ -1060,7 +1059,7 @@
                     },
                     "replacement_policy": "system.cpu.dcache.replacement_policy",
                     "sequential_access": false,
-                    "size": 32768,
+                    "size": 4096,
                     "system": "system",
                     "tag_latency": 2,
                     "warmup_percentage": 0
@@ -1127,7 +1126,7 @@
                 },
                 "response_latency": 2,
                 "sequential_access": false,
-                "size": 32768,
+                "size": 4096,
                 "system": "system",
                 "tag_latency": 2,
                 "tags": {
@@ -1148,7 +1147,7 @@
                         "assoc": 2,
                         "entry_size": 64,
                         "eventq_index": 0,
-                        "size": 32768
+                        "size": 4096
                     },
                     "power_model": [],
                     "power_state": {
@@ -1166,7 +1165,7 @@
                     },
                     "replacement_policy": "system.cpu.icache.replacement_policy",
                     "sequential_access": false,
-                    "size": 32768,
+                    "size": 4096,
                     "system": "system",
                     "tag_latency": 2,
                     "warmup_percentage": 0

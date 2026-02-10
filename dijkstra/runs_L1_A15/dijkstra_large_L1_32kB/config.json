@@ -949,8 +949,7 @@
                     "path": "system.cpu.workload",
                     "cmd": [
                         "/home/santiago/archmic/Tp4/dijkstra/dijkstra_large.riscv",
-                        "/home/santiago/archmic/Tp4/dijkstra/input.dat",
-                        "--l1-size=32kB"
+                        "/home/santiago/archmic/Tp4/dijkstra/input.dat"
                     ],
                     "cwd": "/home/santiago/archmic/Tp4/dijkstra",
                     "drivers": [],

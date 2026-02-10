@@ -34,8 +34,8 @@ run_one() {
   "$GEM5" -d "$outdir" \
     "$CFG" \
     --cmd="$prog" \
-    --options "$INPUT_DAT" \
-    --l1-size="$l1" >/dev/null
+    --l1-size="$l1" \
+    --options "$INPUT_DAT" >/dev/null
 
   local stats="${outdir}/stats.txt"
   if [[ ! -f "$stats" ]]; then

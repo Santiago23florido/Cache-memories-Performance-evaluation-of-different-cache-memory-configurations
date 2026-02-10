@@ -949,8 +949,7 @@
                     "path": "system.cpu.workload",
                     "cmd": [
                         "/home/santiago/archmic/Tp4/blowfish/bf.riscv",
-                        "/home/santiago/archmic/Tp4/blowfish/input.dat",
-                        "--l1-size=32kB"
+                        "/home/santiago/archmic/Tp4/blowfish/input.dat"
                     ],
                     "cwd": "/home/santiago/archmic/Tp4/blowfish",
                     "drivers": [],

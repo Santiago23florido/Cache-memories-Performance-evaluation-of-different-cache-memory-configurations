@@ -1,0 +1,81 @@
+\subsection{Impact de la taille des caches L1}
+
+Les figures suivantes présentent l’évolution des performances en fonction de la taille du cache L1. Pour Dijkstra, les deux jeux de données (small/large) sont affichés dans le même graphique. Les résultats sont regroupés par catégorie : performance générale, hiérarchie mémoire et prédiction de branchement.
+
+\paragraph{Performance générale (CPI, IPC, cycles).}
+\begin{figure}[h]
+\centering
+\subfloat[CPI (A7).]{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A7/cpi_bar.png}}
+\subfloat[IPC (A7).]{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A7/ipc_bar.png}}
+\subfloat[Cycles (A7).]{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A7/numCycles_bar.png}}\\
+\subfloat[CPI (A15).]{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A15/cpi_bar.png}}
+\subfloat[IPC (A15).]{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A15/ipc_bar.png}}
+\subfloat[Cycles (A15).]{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A15/numCycles_bar.png}}
+\caption{Dijkstra : performance générale en fonction de la taille du cache L1 (A7 en haut, A15 en bas).}
+\label{fig:dijkstra-l1-perf}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\subfloat[CPI (A7).]{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/cpi_bar.png}}
+\subfloat[IPC (A7).]{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/ipc_bar.png}}
+\subfloat[Cycles (A7).]{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/numCycles_bar.png}}\\
+\subfloat[CPI (A15).]{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/cpi_bar.png}}
+\subfloat[IPC (A15).]{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/ipc_bar.png}}
+\subfloat[Cycles (A15).]{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/numCycles_bar.png}}
+\caption{Blowfish : performance générale en fonction de la taille du cache L1 (A7 en haut, A15 en bas).}
+\label{fig:blowfish-l1-perf}
+\end{figure}
+
+\paragraph{Hiérarchie mémoire (taux de défauts).}
+\begin{figure}[h]
+\centering
+\subfloat{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A7/icache_miss_bar.png}}
+\subfloat{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A7/dcache_miss_bar.png}}
+\subfloat{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A7/l2_miss_bar.png}}\\
+\subfloat{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A15/icache_miss_bar.png}}
+\subfloat{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A15/dcache_miss_bar.png}}
+\subfloat{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A15/l2_miss_bar.png}}
+\caption{Dijkstra : taux de défauts I-Cache, D-Cache et L2 en fonction de la taille du cache L1 (A7 en haut, A15 en bas).}
+\label{fig:dijkstra-l1-mem}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/icache_miss_bar.png}}
+\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/dcache_miss_bar.png}}
+\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/l2_miss_bar.png}}\\
+\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/icache_miss_bar.png}}
+\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/dcache_miss_bar.png}}
+\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/l2_miss_bar.png}}
+\caption{Blowfish : taux de défauts I-Cache, D-Cache et L2 en fonction de la taille du cache L1 (A7 en haut, A15 en bas).}
+\label{fig:blowfish-l1-mem}
+\end{figure}
+
+\paragraph{Prédiction de branchement.}
+\begin{figure}[h]
+\centering
+\subfloat{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A7/bp_cond_mispredict_rate_bar.png}}
+\subfloat{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A7/bp_mispredict_rate_bar.png}}
+\subfloat{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A7/btb_hit_ratio_bar.png}}\\
+\subfloat{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A15/bp_cond_mispredict_rate_bar.png}}
+\subfloat{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A15/bp_mispredict_rate_bar.png}}
+\subfloat{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A15/btb_hit_ratio_bar.png}}
+\caption{Dijkstra : métriques de prédiction de branchement en fonction de la taille du cache L1 (A7 en haut, A15 en bas).}
+\label{fig:dijkstra-l1-branch}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/bp_cond_mispredict_rate_bar.png}}
+\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/bp_mispredict_rate_bar.png}}
+\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/btb_hit_ratio_bar.png}}\\
+\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/bp_cond_mispredict_rate_bar.png}}
+\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/bp_mispredict_rate_bar.png}}
+\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/btb_hit_ratio_bar.png}}
+\caption{Blowfish : métriques de prédiction de branchement en fonction de la taille du cache L1 (A7 en haut, A15 en bas).}
+\label{fig:blowfish-l1-branch}
+\end{figure}
+
+\paragraph{Analyse synthétique.}
+Quand la taille du L1 augmente, les taux de défauts I/D diminuent nettement, ce qui réduit le CPI et augmente l’IPC (amélioration plus marquée sur Dijkstra, plus sensible à la mémoire). Les métriques de prédiction de branchement restent globalement stables, ce qui est attendu car le prédicteur ne change pas entre configurations. Pour le Cortex-A7, la meilleure performance observée est obtenue avec \textbf{L1 = 16\,kB} pour Dijkstra (small et large) et pour Blowfish (CPI minimal et IPC maximal, avec un gain qui se stabilise entre 8\,kB et 16\,kB).
