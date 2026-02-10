@@ -1,0 +1,6 @@
+jeu_donnees,L1_taille,cpi,numCycles,dossier_sortie
+run,1kB,5.001812,587988,/home/santiago/archmic/Tp4/blowfish/runs_L1_A7/blowfish_run_L1_1kB
+run,2kB,5.001812,587988,/home/santiago/archmic/Tp4/blowfish/runs_L1_A7/blowfish_run_L1_2kB
+run,4kB,5.001812,587988,/home/santiago/archmic/Tp4/blowfish/runs_L1_A7/blowfish_run_L1_4kB
+run,8kB,5.001812,587988,/home/santiago/archmic/Tp4/blowfish/runs_L1_A7/blowfish_run_L1_8kB
+run,16kB,5.001812,587988,/home/santiago/archmic/Tp4/blowfish/runs_L1_A7/blowfish_run_L1_16kB
