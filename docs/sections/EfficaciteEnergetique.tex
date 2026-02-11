@@ -1,0 +1,47 @@
+\paragraph{Efficacité surfacique.}
+On utilise les IPC issus des fichiers CSV (par processus et par taille de L1) et la surface
+totale du cœur avec L2 fixe (512\,kB) :
+\[
+\eta = \frac{IPC}{S_{\text{total}}}\quad\text{avec}\quad
+S_{\text{total}} = S_{\text{core hors L1}} + 2S_{L1} + S_{L2}.
+\]
+Ici $S_{L2}(A7)=0{,}94241$~mm$^2$ et $S_{L2}(A15)=0{,}94019$~mm$^2$.
+Les valeurs suivantes sont donc en $IPC/\text{mm}^2$.
+
+\begin{table}[h]
+\centering
+\footnotesize
+\begin{tabular}{c|ccc}
+\hline
+\textbf{L1 (kB)} & \textbf{Dijkstra small} & \textbf{Dijkstra large} & \textbf{Blowfish} \\
+\hline
+\multicolumn{4}{c}{\textbf{Cortex-A7}}\\
+1  & --      & --      & -- \\
+2  & 0,1787  & 0,1778  & 0,1466 \\
+4  & 0,1860  & 0,1846  & 0,1465 \\
+8  & 0,2006  & 0,1989  & 0,1458 \\
+16 & 0,2025  & 0,2009  & 0,1434 \\
+\hline
+\end{tabular}
+\caption{Efficacité surfacique du Cortex-A7 (L2=512\,kB).}
+\end{table}
+
+\begin{table}[h]
+\centering
+\footnotesize
+\begin{tabular}{c|ccc}
+\hline
+\textbf{L1 (kB)} & \textbf{Dijkstra small} & \textbf{Dijkstra large} & \textbf{Blowfish} \\
+\hline
+\multicolumn{4}{c}{\textbf{Cortex-A15}}\\
+2  & 0,2249  & 0,2269  & 0,1833 \\
+4  & 0,2516  & 0,2500  & 0,1850 \\
+8  & 0,3253  & 0,3129  & 0,1845 \\
+16 & 0,3516  & 0,3386  & 0,1841 \\
+32 & 0,3908  & 0,3907  & 0,1823 \\
+\hline
+\end{tabular}
+\caption{Efficacité surfacique du Cortex-A15 (L2=512\,kB).}
+\end{table}
+
+\textit{Note :} CACTI ne fournit pas d’organisation valide pour A7 à 1\,kB, d’où ``--''.
