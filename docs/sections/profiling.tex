@@ -12,18 +12,19 @@ Pour procéder à l’évaluation des configurations de cache pour chacun des al
 \hline
 \textbf{Classe} & \textbf{Dijkstra large (A7)} & \textbf{Dijkstra large (A15)} \\
 \hline
-Lecture (Load) & 45\,516\,963 [28.4] & 45\,905\,506 [28.5] \\
-Écriture (Store) & 19\,439\,553 [12.1] & 19\,593\,718 [12.1] \\
-Branchement & 43\,904\,570 [21.5] & 44\,122\,872 [21.5] \\
-Calcul entier (Int) & 95\,334\,242 [59.5] & 95\,780\,142 [59.4] \\
-Calcul flottant (Fp) & 0 [0.0] & 0 [0.0] \\
+Lecture (Load) & 45\,354\,411 [22.2] & 45\,740\,419 [22.3] \\
+Écriture (Store) & 19\,449\,403 [9.5] & 19\,639\,263 [9.6] \\
+Branchement & 43\,970\,804 [21.6] & 44\,233\,561 [21.5] \\
+Références mémoire (MemRefs) & 64\,803\,814 [31.8] & 65\,379\,682 [31.8] \\
+Calcul entier  & 139\,193\,914 [68.2] & 140\,143\,451 [68.2] \\
 \hline
-\textbf{Total d’instructions exécutées} & \textbf{204\,195\,328} & \textbf{205\,402\,238} \\
+\textbf{Total d’instructions exécutées} & \textbf{203\,997\,728} & \textbf{205\,523\,133} \\
 \hline
 \end{tabular}
 }
-\caption{Dijkstra large (Cortex-A7 vs Cortex-A15).}
+\caption{Dijkstra large (Cortex-A7 vs Cortex-A15) }
 \end{table}
+
 
 \begin{table}[h]
 \centering
@@ -34,18 +35,19 @@ Calcul flottant (Fp) & 0 [0.0] & 0 [0.0] \\
 \hline
 \textbf{Classe} & \textbf{Dijkstra small (A7)} & \textbf{Dijkstra small (A15)} \\
 \hline
-Lecture (Load) & 10\,313\,882 [28.5] & 10\,474\,419 [28.5] \\
-Écriture (Store) & 4\,759\,916 [13.2] & 4\,850\,175 [13.2] \\
-Branchement & 9\,823\,729 [21.4] & 9\,978\,854 [21.4] \\
-Calcul entier (Int) & 21\,106\,947 [58.3] & 21\,363\,899 [58.2] \\
-Calcul flottant (Fp) & 0 [0.0] & 0 [0.0] \\
+Lecture (Load) & 10\,282\,770 [22.4] & 10\,455\,962 [22.4] \\
+Écriture (Store) & 4\,769\,894 [10.4] & 4\,845\,319 [10.4] \\
+Branchement & 9\,839\,620 [21.4] & 9\,990\,687 [21.4] \\
+Références mémoire (MemRefs) & 15\,052\,664 [32.7] & 15\,301\,281 [32.8] \\
+Calcul entier  & 30\,916\,920 [67.3] & 31\,379\,238 [67.2] \\
 \hline
-\textbf{Total d’instructions exécutées} & \textbf{46\,004\,474} & \textbf{46\,667\,347} \\
+\textbf{Total d’instructions exécutées} & \textbf{45\,969\,584} & \textbf{46\,680\,519} \\
 \hline
 \end{tabular}
 }
-\caption{Dijkstra small (Cortex-A7 vs Cortex-A15).}
+\caption{Dijkstra small (Cortex-A7 vs Cortex-A15) }
 \end{table}
+
 
 \begin{table}[h]
 \centering
@@ -54,27 +56,135 @@ Calcul flottant (Fp) & 0 [0.0] & 0 [0.0] \\
 \resizebox{\linewidth}{!}{%
 \begin{tabular}{l|c|c}
 \hline
-\textbf{Classe} & \textbf{Blowfish (A7)} & \textbf{Blowfish (A15)} \\
+\textbf{Classe} & \textbf{Blowfish small (A7)} & \textbf{Blowfish small (A15)} \\
 \hline
-Lecture (Load) & 19\,141 [21.8] & 19\,769 [21.3] \\
-Écriture (Store) & 5\,516 [6.3] & 5\,671 [6.1] \\
-Branchement & 29\,760 [25.3] & 30\,060 [24.4] \\
-Calcul entier (Int) & 63\,342 [72.0] & 67\,560 [72.6] \\
-Calcul flottant (Fp) & 0 [0.0] & 0 [0.0] \\
+Lecture (Load) & 806\,840 [22.5] & 853\,821 [23.9] \\
+Écriture (Store) & 430\,428 [12.0] & 418\,788 [11.7] \\
+Branchement & 361\,461 [10.1] & 353\,242 [9.9] \\
+Références mémoire (MemRefs) & 1\,237\,268 [34.5] & 1\,272\,609 [35.7] \\
+Calcul entier  & 2\,348\,046 [65.5] & 2\,294\,903 [64.3] \\
 \hline
-\textbf{Total d’instructions exécutées} & \textbf{117\,759} & \textbf{123\,060} \\
+\textbf{Total d’instructions exécutées} & \textbf{3\,585\,314} & \textbf{3\,567\,512} \\
 \hline
 \end{tabular}
 }
-\caption{Blowfish (Cortex-A7 vs Cortex-A15).}
+\caption{Blowfish small (Cortex-A7 vs Cortex-A15) }
 \end{table}
 
-Le \emph{profiling} indique que la classe dominante dans les deux programmes est le calcul entier (\(\approx 60\,\%\) pour Dijkstra et \(\approx 72\,\%\) pour Blowfish) ; ainsi, une micro-architecture disposant de davantage d’ALU entières ou d’un parallélisme accru sur l’entier peut apporter le gain le plus important. Les branchements représentent également une part notable : restructurer les boucles ou réduire les sauts peut donc limiter les pénalités de contrôle. Côté mémoire, Dijkstra est plus sensible car il combine de nombreux accès, souvent irréguliers ; des améliorations de cache et de latence ont donc un impact plus marqué. Blowfish présente généralement des accès plus séquentiels et une meilleure localité : la hiérarchie mémoire aide, mais le goulot principal demeure le \emph{throughput} du calcul entier.
+
+\begin{table}[h]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{l|c|c}
+\hline
+\textbf{Classe} & \textbf{Blowfish large (A7)} & \textbf{Blowfish large (A15)} \\
+\hline
+Lecture (Load) & 3\,014\,650 [22.9] & 3\,295\,893 [24.4] \\
+Écriture (Store) & 1\,677\,678 [12.7] & 1\,679\,901 [12.4] \\
+Branchement & 1\,350\,032 [10.2] & 1\,356\,138 [10.0] \\
+Références mémoire (MemRefs) & 4\,692\,328 [35.6] & 4\,975\,794 [36.9] \\
+Calcul entier  & 8\,499\,974 [64.4] & 8\,518\,974 [63.1] \\
+\hline
+\textbf{Total d’instructions exécutées} & \textbf{13\,192\,302} & \textbf{13\,494\,768} \\
+\hline
+\end{tabular}
+}
+\caption{Blowfish large (Cortex-A7 vs Cortex-A15) }
+\end{table}
+
+Il est important de souligner que, même si le \emph{profiling} montre que les instructions dominantes dans les applications sont des instructions de calcul entier, le pourcentage élevé associé aux opérations mémoire crée néanmoins la nécessité d’évaluer la latence des processus mémoire. L’objectif est de déterminer si, malgré leur caractère non dominant, ces opérations peuvent constituer le goulot d’étranglement de l’application. Pour cela, on propose d’estimer l’effet des \emph{misses} dans les caches L1 et L2, sous la forme d’un coût approximatif en cycles, afin d’évaluer ensuite la part de ces pertes dans le CPI et de conclure si ces résultats sont, ou non, représentatifs par rapport au pourcentage d’instructions liées aux calculs. Il convient de pr\'eciser que le calcul relatif au cache L1 est effectu\'e uniquement \`a partir des \emph{misses} du cache de donn\'ees, car les \emph{misses} du cache d’instructions ne sont pas consid\'er\'es comme suffisamment repr\'esentatifs pour \^etre pris en compte dans l’analyse.
+
+Pour réaliser cette estimation, on cherche d’abord à déterminer le nombre de \emph{ticks} par cycle dans la simulation, défini par l’équation \eqref{eq:tpc} :
+\begin{equation}
+\mathrm{TPC}=\frac{\text{simTicks}}{\text{numCycles}}
+\label{eq:tpc}
+\end{equation}
+
+La fréquence CPU correspondante est alors calculée à partir de l’équation \eqref{eq:fcpu} :
+\begin{equation}
+f_{\text{cpu}}=\frac{\text{simFreq}}{\mathrm{TPC}}
+\label{eq:fcpu}
+\end{equation}
+
+Ensuite, pour les simulations, on prévoit de calculer une pénalité de perte en L1 à l’aide de l’équation \eqref{eq:pl1} :
+\begin{equation}
+P_{L1}=\frac{L_{L1}}{\mathrm{TPC}}
+\quad [\text{cycles/miss}]
+\label{eq:pl1}
+\end{equation}
+où $L_{L1}$ représente la latence moyenne d’un \emph{miss} en L1 exprimée en \emph{ticks/miss}.
+
+De la même manière, on applique l’équation correspondante pour L2, en gardant à l’esprit que le coût d’un \emph{miss} L2 implique un accès à la mémoire principale (RAM) et est donc associé à un coût plus élevé, comme indiqué par l’équation \eqref{eq:pl2} :
+\begin{equation}
+P_{L2}=\frac{L_{L2}}{\mathrm{TPC}}
+\quad [\text{cycles/miss}]
+\label{eq:pl2}
+\end{equation}
+où $L_{L2}$ représente la latence moyenne d’un \emph{miss} en L2 exprimée en \emph{ticks/miss}.
+
+On propose ensuite de calculer une fréquence de \emph{misses} par tranche de 1000 instructions, pour les deux niveaux de mémoire, à l’aide de l’équation \eqref{eq:mpki} :
+\begin{equation}
+\mathrm{MPKI}=\frac{\text{misses}}{\text{numInsts}}\cdot 1000
+\label{eq:mpki}
+\end{equation}
+
+Enfin, à partir de cela, on estime pour chaque niveau de cache (L1 et L2) le coût moyen de ces pertes sur le CPI. Pour L1, on utilise l’approximation donnée par l’équation \eqref{eq:dcpi_l1} :
+\begin{equation}
+\Delta \mathrm{CPI}_{L1}\approx \frac{\mathrm{MPKI}_{L1}}{1000}\cdot P_{L1}
+\label{eq:dcpi_l1}
+\end{equation}
 
 
-La comparaison montre que, tant pour Dijkstra/SSCA2-BCS que pour le produit de polynômes et Blowfish, le profil d’exécution est fortement dominé par les instructions de calcul : dans Dijkstra et Blowfish, le calcul entier prédomine, tandis que, pour un produit de polynômes implémenté en flottant, on observe une fraction élevée de calcul FP. Par conséquent, une amélioration architecturale transversale consiste à accroître le parallélisme d’exécution dans la classe dominante (davantage d’ALU entières pour les applications entières et davantage d’unités FP si le noyau est flottant), car cette approche cible directement la plus grande proportion d’instructions.
+\begin{table}[h]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{l|c|c|c|c}
+\hline
+\textbf{Case} & \textbf{CPI} & \textbf{\%CPI mem total} & \textbf{\%CPI L1-only (approx)} & \textbf{\%CPI L2-miss} \\
+\hline
+smalldijkstraA7 & 3.415 & 2.08\% & 1.71\% & 0.37\% \\
+smalldijkstraA15 & 0.863 & 7.64\% & 6.81\% & 0.83\% \\
+largedijkstraA7 & 3.424 & 2.50\% & 2.42\% & 0.08\% \\
+largedijkstraA15 & 0.874 & 9.99\% & 9.80\% & 0.19\% \\
+\hline
+\end{tabular}
+}
+\caption{Contribution estimée de la pénalité mémoire au CPI pour les exécutions de Dijkstra}
+\end{table}
 
-La principale divergence concerne le comportement mémoire. Dijkstra/SSCA2-BCS (graphes) exécute généralement de nombreux \emph{loads/stores} et, surtout, avec des accès irréguliers (dépendants de structures chaînées ou de motifs non linéaires). Cela dégrade la localité, augmente les \emph{miss} en cache et rend les performances très sensibles aux modifications de la hiérarchie mémoire (tailles/associativité des caches, latences, politiques, etc.). À l’inverse, le produit de polynômes et, dans une large mesure, Blowfish présentent des accès plus séquentiels et localisés, ce qui favorise les caches et réduit la pénalité mémoire ; dans ces cas, le goulot d’étranglement se déplace davantage vers le \emph{throughput} de calcul.
+\begin{table}[h]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{l|c|c|c|c}
+\hline
+\textbf{Case} & \textbf{CPI} & \textbf{\%CPI mem total} & \textbf{\%CPI L1-only (approx)} & \textbf{\%CPI L2-miss} \\
+\hline
+bfA7\_small & 3.362 & 3.97\% & 0.50\% & 3.47\% \\
+bfA15\_small & 0.705 & 18.64\% & 9.34\% & 9.30\% \\
+bfA7\_large & 3.303 & 1.11\% & 0.15\% & 0.96\% \\
+bfA15\_large & 0.668 & 5.30\% & 2.56\% & 2.75\% \\
+\hline
+\end{tabular}
+}
+\caption{Contribution estimée de la pénalité mémoire au CPI pour les exécutions de Blowfish}
+\end{table}
 
-Enfin, même si leur poids relatif varie, toutes ces applications peuvent bénéficier d’améliorations du contrôle de flux (branchements) : réduire les sauts via la restructuration des boucles et la simplification des conditions, ou améliorer la prédiction de branchement, diminue les pénalités de mauvaise prédiction et contribue à abaisser le CPI. En synthèse, le meilleur scénario combine (1) davantage de capacité de calcul dans la classe dominante, (2) une optimisation mémoire particulièrement critique pour les graphes, et (3) des améliorations de prédiction/codage apportant des gains additionnels de manière générale.
+Les r\'esultats du \emph{profiling}, combin\'es avec le co\^ut des op\'erations m\'emoire dans les deux applications, indiquent que le goulot d’\'etranglement principal se situe davantage du c\^ot\'e du c\oe{}ur (fen\^etre OoO/ROB, files m\'emoire, d\'ependances et contr\^ole de flux). Par cons\'equent, une micro-architecture disposant de davantage d’ALU enti\`eres, ou d’un parall\'elisme accru sur les op\'erations enti\`eres, peut apporter le gain le plus important. Les branchements repr\'esentent \'egalement une part notable : restructurer les boucles ou r\'eduire les sauts peut donc limiter les p\'enalit\'es de contr\^ole.
 
+On observe aussi qu’apr\`es l’am\'elioration des unit\'es de calcul et la capacit\'e \`a exploiter davantage le parall\'elisme au niveau des instructions, lorsque le CPI diminue fortement, les \emph{misses} de cache deviennent plus significatifs. Dans ce contexte, la mise en \oe{}uvre d’un design r\'eduisant les \emph{misses} de cache devient plus int\'eressante pour une impl\'ementation ult\'erieure.
+
+De plus, il convient de consid\'erer que, dans le cas de Dijkstra, en raison de la nature de l’algorithme et des structures de donn\'ees qu’il emploie, les branchements ont un effet important. Cela sugg\`ere qu’une am\'elioration du pr\'edicteur de branchement, pour cette application et pour ces configurations, pourrait \'egalement repr\'esenter un gain significatif en IPC.
+
+En termes de comparaison, on observe que \textbf{Dijkstra / SSCA2-BCS}, en tant qu’algorithmes sur graphes, pr\'esentent un profil m\'emoire caract\'eris\'e par de nombreux acc\`es irr\'eguliers : beaucoup de \emph{loads/stores}, du \emph{pointer chasing} et une faible localit\'e. Cela rend les m\'ecanismes de pr\'echargement (\emph{prefetching}) nettement moins efficaces. La nature de ces algorithmes implique \'egalement des branchements fr\'equents et souvent moins pr\'edictibles (boucles et conditions d\'ependantes des donn\'ees), ce qui rend la performance tr\`es sensible \`a la fen\^etre OoO (ROB/LSQ), au pr\'edicteur de branchement et \`a la capacit\'e \`a masquer la latence.
+
+De son c\^ot\'e, \textbf{Blowfish}, comme Dijkstra, est domin\'e par des instructions enti\`eres, mais s’en distingue par des acc\`es souvent plus s\'equentiels et mieux localis\'es (bonne localit\'e, caches plus efficaces). Cela se refl\`ete dans le fait que, pour les jeux de donn\'ees \emph{large} de Blowfish, la part du CPI associ\'ee aux op\'erations m\'emoire est consid\'erablement plus faible que celle induite par les \emph{misses} dans Dijkstra. Il convient toutefois de noter que, pour les cas \emph{small}, ces conditions ne sont pas n\'ecessairement v\'erifi\'ees : dans Blowfish, le dataset small  est souvent domin\'e par des effets de d\'emarrage et d’\emph{overhead}. Par ailleurs, l’impact des branchements est globalement moins marqu\'e dans Blowfish que dans Dijkstra.
+
+Dans le cas de \textbf{SHA-1}, l’effet des instructions enti\`eres est encore plus dominant que dans les deux applications pr\'ec\'edentes, ce qui met davantage en \'evidence la nature \emph{compute-bound} de son impl\'ementation. De plus, SHA-1 pr\'esente g\'en\'eralement un bon comportement de \emph{streaming} sur les tampons (\emph{buffers}).
+
+Enfin, pour les \textbf{produits de polyn\^omes / convolution}, les acc\`es sont plut\^ot s\'equentiels (tableaux), ce qui conduit \`a des caches efficaces. N\'eanmoins, avec de tr\`es grands tableaux et une bonne vectorisation, l’ex\'ecution peut devenir limit\'ee par la bande passante m\'emoire (\emph{memory-bandwidth-bound}), en particulier lorsque les produits sont effectu\'es en flottant, o\`u le volume d’octets transf\'er\'es par op\'eration (octets par flop) devient \'elev\'e. Dans ce cas, une forte proportion d’op\'erations flottantes peut \'egalement conduire \`a un comportement \emph{FP-bound}.

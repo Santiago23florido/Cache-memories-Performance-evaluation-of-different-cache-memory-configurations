@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #define NUM_NODES                          100
 #define NONE                               9999
@@ -69,7 +70,7 @@ void enqueue (int iNode, int iDist, int iPrev)
       qLast->qNext = qNew;
     }
   g_qCount++;
-  /* ASSERT(g_qCount); */
+  //               ASSERT(g_qCount);
 }
 
 
@@ -79,7 +80,7 @@ void dequeue (int *piNode, int *piDist, int *piPrev)
   
   if (qHead)
     {
-      /* ASSERT(g_qCount); */
+      //                 ASSERT(g_qCount);
       *piNode = qHead->iNode;
       *piDist = qHead->iDist;
       *piPrev = qHead->iPrev;

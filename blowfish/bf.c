@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "blowfish.h"
+#include <ctype.h>
+#include <stdlib.h>
 
 int
 main(int argc, char *argv[])
@@ -87,8 +89,8 @@ while(!feof(fp))
 	i=0;
 }
 
-close(fp);
-close(fp2);
+fclose(fp);
+fclose(fp2);
 
 exit(1);
 }

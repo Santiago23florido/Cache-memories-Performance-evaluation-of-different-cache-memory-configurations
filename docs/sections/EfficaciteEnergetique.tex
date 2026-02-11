@@ -11,16 +11,16 @@ Les valeurs suivantes sont donc en $IPC/\text{mm}^2$.
 \begin{table}[h]
 \centering
 \footnotesize
-\begin{tabular}{c|ccc}
+\begin{tabular}{c|cccc}
 \hline
-\textbf{L1 (kB)} & \textbf{Dijkstra small} & \textbf{Dijkstra large} & \textbf{Blowfish} \\
+\textbf{L1 (kB)} & \textbf{Dijkstra small} & \textbf{Dijkstra large} & \textbf{Blowfish small} & \textbf{Blowfish large} \\
 \hline
-\multicolumn{4}{c}{\textbf{Cortex-A7}}\\
-1  & --      & --      & -- \\
-2  & 0,1787  & 0,1778  & 0,1466 \\
-4  & 0,1860  & 0,1846  & 0,1465 \\
-8  & 0,2006  & 0,1989  & 0,1458 \\
-16 & 0,2025  & 0,2009  & 0,1434 \\
+\multicolumn{5}{c}{\textbf{Cortex-A7}}\\
+1  & --      & --      & --      & -- \\
+2  & 0,1787  & 0,1778  & 0,1859  & 0,1902 \\
+4  & 0,1860  & 0,1846  & 0,1943  & 0,1983 \\
+8  & 0,2006  & 0,1989  & 0,2127  & 0,2162 \\
+16 & 0,2025  & 0,2009  & 0,2102  & 0,2138 \\
 \hline
 \end{tabular}
 \caption{Efficacité surfacique du Cortex-A7 (L2=512\,kB).}
@@ -29,16 +29,16 @@ Les valeurs suivantes sont donc en $IPC/\text{mm}^2$.
 \begin{table}[h]
 \centering
 \footnotesize
-\begin{tabular}{c|ccc}
+\begin{tabular}{c|cccc}
 \hline
-\textbf{L1 (kB)} & \textbf{Dijkstra small} & \textbf{Dijkstra large} & \textbf{Blowfish} \\
+\textbf{L1 (kB)} & \textbf{Dijkstra small} & \textbf{Dijkstra large} & \textbf{Blowfish small} & \textbf{Blowfish large} \\
 \hline
-\multicolumn{4}{c}{\textbf{Cortex-A15}}\\
-2  & 0,2249  & 0,2269  & 0,1833 \\
-4  & 0,2516  & 0,2500  & 0,1850 \\
-8  & 0,3253  & 0,3129  & 0,1845 \\
-16 & 0,3516  & 0,3386  & 0,1841 \\
-32 & 0,3908  & 0,3907  & 0,1823 \\
+\multicolumn{5}{c}{\textbf{Cortex-A15}}\\
+2  & 0,2249  & 0,2269  & 0,3487  & 0,3667 \\
+4  & 0,2516  & 0,2500  & 0,3710  & 0,3915 \\
+8  & 0,3253  & 0,3129  & 0,4444  & 0,4669 \\
+16 & 0,3516  & 0,3386  & 0,4523  & 0,4763 \\
+32 & 0,3908  & 0,3907  & 0,4820  & 0,5094 \\
 \hline
 \end{tabular}
 \caption{Efficacité surfacique du Cortex-A15 (L2=512\,kB).}

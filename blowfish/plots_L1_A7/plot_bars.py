@@ -58,12 +58,27 @@ def format_value(value: float | None) -> str:
 def pick_csv(dir_path: Path, csv_arg: str | None) -> Path:
     if csv_arg:
         return Path(csv_arg)
+    for pattern in ("metrics_*.csv", "resultats_*.csv"):
+        csvs = sorted(dir_path.glob(pattern))
+        if csvs:
+            if len(csvs) > 1:
+                print("Aviso: se encontraron varios CSV, se usara el primero:", csvs[0])
+            return csvs[0]
     csvs = sorted(dir_path.glob("*.csv"))
     if not csvs:
         raise SystemExit("No se encontro ningun .csv en el directorio actual.")
     if len(csvs) > 1:
         print("Aviso: se encontraron varios CSV, se usara el primero:", csvs[0])
     return csvs[0]
+
+
+def order_datasets(datasets: list[str]) -> list[str]:
+    preferred = ["small", "large"]
+    ordered = [d for d in preferred if d in datasets]
+    rest = [d for d in datasets if d not in ordered]
+    return ordered + sorted(rest)
+
+
 
 
 
@@ -99,6 +114,7 @@ def main() -> int:
     datasets = sorted({r.get("jeu_donnees", "") for r in rows if r.get("jeu_donnees")})
     if not datasets:
         datasets = ["datos"]
+    datasets = order_datasets(datasets)
 
     l1_sizes = sorted({r.get("L1_taille", "") for r in rows if r.get("L1_taille")}, key=parse_size)
     if not l1_sizes:
@@ -119,12 +135,10 @@ def main() -> int:
                 values[ds][l1][m] = val
 
     x = list(range(len(l1_sizes)))
-    n_datasets = max(1, len(datasets))
-    width = 0.8 / n_datasets
 
-    for m in metrics:
+    def y_limits(ds_list: list[str]) -> tuple[float, float]:
         metric_values = []
-        for ds in datasets:
+        for ds in ds_list:
             for l1 in l1_sizes:
                 v = values[ds][l1][m]
                 if v is not None and not math.isnan(v):
@@ -134,30 +148,29 @@ def main() -> int:
             max_v = max(metric_values)
             if min_v == max_v:
                 pad = max(abs(max_v) * 0.02, 1.0)
-                y_min = min_v - pad
-                y_max = max_v + pad
-            else:
-                range_v = max_v - min_v
-                rel = range_v / max(abs(max_v), 1e-12)
-                if rel < 0.1:
-                    pad = max(range_v * 0.1, abs(max_v) * 0.01, 1e-6)
-                    y_min = min_v - pad
-                    y_max = max_v + pad
-                else:
-                    y_min = 0.0
-                    y_max = max_v * 1.05
-        else:
-            y_min, y_max = 0.0, 1.0
+                return min_v - pad, max_v + pad
+            range_v = max_v - min_v
+            rel = range_v / max(abs(max_v), 1e-12)
+            if rel < 0.1:
+                pad = max(range_v * 0.1, abs(max_v) * 0.01, 1e-6)
+                return min_v - pad, max_v + pad
+            return 0.0, max_v * 1.05
+        return 0.0, 1.0
+
+    def plot_for(ds_list: list[str]) -> None:
+        n_datasets = max(1, len(ds_list))
+        width = 0.8 / n_datasets
+        y_min, y_max = y_limits(ds_list)
         fig, ax = plt.subplots()
         ax.set_ylim(y_min, y_max)
-        for j, ds in enumerate(datasets):
+        for j, ds in enumerate(ds_list):
             offset = (j - (n_datasets - 1) / 2.0) * width
             xs = [i + offset for i in x]
             ys = []
             for l1 in l1_sizes:
                 v = values[ds][l1][m]
                 ys.append(v if v is not None else math.nan)
-            label = ds if len(datasets) > 1 else None
+            label = ds if len(ds_list) > 1 else None
             bars = ax.bar(xs, ys, width=width, label=label)
             ax.bar_label(
                 bars,
@@ -171,7 +184,7 @@ def main() -> int:
         ax.set_xlabel("L1_taille")
         ax.set_ylabel(m)
         ax.set_title(f"{m} por L1_taille")
-        if len(datasets) > 1:
+        if len(ds_list) > 1:
             ax.legend()
         fig.tight_layout()
         out_file = outdir / f"{m}_bar.png"
@@ -180,6 +193,9 @@ def main() -> int:
             plt.show()
         plt.close(fig)
         print("Grafico guardado en:", out_file)
+
+    for m in metrics:
+        plot_for(datasets)
 
     return 0
 

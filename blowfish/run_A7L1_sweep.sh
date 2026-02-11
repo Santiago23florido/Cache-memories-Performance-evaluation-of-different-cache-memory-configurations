@@ -4,7 +4,9 @@ set -euo pipefail
 BASE_DIR="/home/santiago/archmic/Tp4/blowfish"
 GEM5="/home/santiago/archmic/gem5/build/RISCV/gem5.opt"
 CFG="/home/santiago/archmic/Tp4/CortexA7L1.py"
-INPUT_DAT="/home/santiago/archmic/Tp4/blowfish/input.dat"
+INPUT_SMALL="/home/santiago/archmic/Tp4/blowfish/input_small.asc"
+INPUT_LARGE="/home/santiago/archmic/Tp4/blowfish/input_large.asc"
+KEY="1234567890abcdeffedcba0987654321"
 
 PROG="/home/santiago/archmic/Tp4/blowfish/bf.riscv"
 
@@ -22,18 +24,20 @@ echo "jeu_donnees,L1_taille,cpi,numCycles,dossier_sortie" > "$CSV_OUT"
 
 run_one() {
   local dataset="$1"
-  local l1="$2"
+  local input_file="$2"
+  local l1="$3"
 
   local outdir="${OUT_SIM_BASE}/blowfish_${dataset}_L1_${l1}"
   rm -rf "$outdir"
   mkdir -p "$outdir"
+  local output_file="${outdir}/output_${dataset}.enc"
 
   echo "Running: dataset=${dataset}, L1=${l1}"
   "$GEM5" -d "$outdir" \
     "$CFG" \
     --cmd="$PROG" \
     --l1-size="$l1" \
-    --options "$INPUT_DAT" >/dev/null
+    --options e "$input_file" "$output_file" "$KEY" >/dev/null
 
   local stats="${outdir}/stats.txt"
   if [[ ! -f "$stats" ]]; then
@@ -55,7 +59,11 @@ run_one() {
 }
 
 for l1 in "${L1_SIZES[@]}"; do
-  run_one "run" "$l1"
+  run_one "small" "$INPUT_SMALL" "$l1"
+done
+
+for l1 in "${L1_SIZES[@]}"; do
+  run_one "large" "$INPUT_LARGE" "$l1"
 done
 
 echo "CSV guardado en: $CSV_OUT"

@@ -1,6 +1,11 @@
 jeu_donnees,L1_taille,cpi,numCycles,dossier_sortie
-run,2kB,1.893163,222530,/home/santiago/archmic/Tp4/blowfish/runs_L1_A15/blowfish_run_L1_2kB
-run,4kB,1.874549,220342,/home/santiago/archmic/Tp4/blowfish/runs_L1_A15/blowfish_run_L1_4kB
-run,8kB,1.867633,219529,/home/santiago/archmic/Tp4/blowfish/runs_L1_A15/blowfish_run_L1_8kB
-run,16kB,1.866654,219414,/home/santiago/archmic/Tp4/blowfish/runs_L1_A15/blowfish_run_L1_16kB
-run,32kB,1.865421,219269,/home/santiago/archmic/Tp4/blowfish/runs_L1_A15/blowfish_run_L1_32kB
+small,2kB,0.994771,3565750,/home/santiago/archmic/Tp4/blowfish/runs_L1_A15/blowfish_small_L1_2kB
+small,4kB,0.934620,3350138,/home/santiago/archmic/Tp4/blowfish/runs_L1_A15/blowfish_small_L1_4kB
+small,8kB,0.775238,2778837,/home/santiago/archmic/Tp4/blowfish/runs_L1_A15/blowfish_small_L1_8kB
+small,16kB,0.759919,2723925,/home/santiago/archmic/Tp4/blowfish/runs_L1_A15/blowfish_small_L1_16kB
+small,32kB,0.705674,2529483,/home/santiago/archmic/Tp4/blowfish/runs_L1_A15/blowfish_small_L1_32kB
+large,2kB,0.946000,12477740,/home/santiago/archmic/Tp4/blowfish/runs_L1_A15/blowfish_large_L1_2kB
+large,4kB,0.885841,11684240,/home/santiago/archmic/Tp4/blowfish/runs_L1_A15/blowfish_large_L1_4kB
+large,8kB,0.737859,9732357,/home/santiago/archmic/Tp4/blowfish/runs_L1_A15/blowfish_large_L1_8kB
+large,16kB,0.721735,9519675,/home/santiago/archmic/Tp4/blowfish/runs_L1_A15/blowfish_large_L1_16kB
+large,32kB,0.667714,8807150,/home/santiago/archmic/Tp4/blowfish/runs_L1_A15/blowfish_large_L1_32kB

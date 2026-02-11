@@ -1,8 +1,7 @@
 \subsection{Impact de la taille des caches L1}
 
-Les figures suivantes présentent l’évolution des performances en fonction de la taille du cache L1. Pour Dijkstra, les deux jeux de données (small/large) sont affichés dans le même graphique. Les résultats sont regroupés par catégorie : performance générale, hiérarchie mémoire et prédiction de branchement.
+Les Figs. (\ref{fig:dijkstra-l1-perf})-(\ref{fig:dijkstra-l1-branch}) et (\ref{fig:blowfish-l1-perf})-(\ref{fig:blowfish-l1-branch}) présentent l’évolution des performances en fonction de la taille du cache L1 pour dijkstra applications et pour Blowfish applications respectivement. 
 
-\paragraph{Performance générale (CPI, IPC, cycles).}
 \begin{figure}[h]
 \centering
 \subfloat[CPI (A7).]{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A7/cpi_bar.png}}
@@ -15,19 +14,7 @@ Les figures suivantes présentent l’évolution des performances en fonction de
 \label{fig:dijkstra-l1-perf}
 \end{figure}
 
-\begin{figure}[h]
-\centering
-\subfloat[CPI (A7).]{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/cpi_bar.png}}
-\subfloat[IPC (A7).]{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/ipc_bar.png}}
-\subfloat[Cycles (A7).]{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/numCycles_bar.png}}\\
-\subfloat[CPI (A15).]{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/cpi_bar.png}}
-\subfloat[IPC (A15).]{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/ipc_bar.png}}
-\subfloat[Cycles (A15).]{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/numCycles_bar.png}}
-\caption{Blowfish : performance générale en fonction de la taille du cache L1 (A7 en haut, A15 en bas).}
-\label{fig:blowfish-l1-perf}
-\end{figure}
 
-\paragraph{Hiérarchie mémoire (taux de défauts).}
 \begin{figure}[h]
 \centering
 \subfloat{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A7/icache_miss_bar.png}}
@@ -40,19 +27,7 @@ Les figures suivantes présentent l’évolution des performances en fonction de
 \label{fig:dijkstra-l1-mem}
 \end{figure}
 
-\begin{figure}[h]
-\centering
-\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/icache_miss_bar.png}}
-\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/dcache_miss_bar.png}}
-\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/l2_miss_bar.png}}\\
-\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/icache_miss_bar.png}}
-\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/dcache_miss_bar.png}}
-\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/l2_miss_bar.png}}
-\caption{Blowfish : taux de défauts I-Cache, D-Cache et L2 en fonction de la taille du cache L1 (A7 en haut, A15 en bas).}
-\label{fig:blowfish-l1-mem}
-\end{figure}
 
-\paragraph{Prédiction de branchement.}
 \begin{figure}[h]
 \centering
 \subfloat{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A7/bp_cond_mispredict_rate_bar.png}}
@@ -67,6 +42,30 @@ Les figures suivantes présentent l’évolution des performances en fonction de
 
 \begin{figure}[h]
 \centering
+\subfloat[CPI (A7).]{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/cpi_bar.png}}
+\subfloat[IPC (A7).]{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/ipc_bar.png}}
+\subfloat[Cycles (A7).]{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/numCycles_bar.png}}\\
+\subfloat[CPI (A15).]{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/cpi_bar.png}}
+\subfloat[IPC (A15).]{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/ipc_bar.png}}
+\subfloat[Cycles (A15).]{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/numCycles_bar.png}}
+\caption{Blowfish : performance générale en fonction de la taille du cache L1 (A7 en haut, A15 en bas).}
+\label{fig:blowfish-l1-perf}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/icache_miss_bar.png}}
+\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/dcache_miss_bar.png}}
+\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/l2_miss_bar.png}}\\
+\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/icache_miss_bar.png}}
+\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/dcache_miss_bar.png}}
+\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/l2_miss_bar.png}}
+\caption{Blowfish : taux de défauts I-Cache, D-Cache et L2 en fonction de la taille du cache L1 (A7 en haut, A15 en bas).}
+\label{fig:blowfish-l1-mem}
+\end{figure}
+
+\begin{figure}[h]
+\centering
 \subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/bp_cond_mispredict_rate_bar.png}}
 \subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/bp_mispredict_rate_bar.png}}
 \subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/btb_hit_ratio_bar.png}}\\
@@ -75,126 +74,47 @@ Les figures suivantes présentent l’évolution des performances en fonction de
 \subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/btb_hit_ratio_bar.png}}
 \caption{Blowfish : métriques de prédiction de branchement en fonction de la taille du cache L1 (A7 en haut, A15 en bas).}
 \label{fig:blowfish-l1-branch}
-\end{figure}
+\end{figure} 
 
-\paragraph{Analyse synthétique.}
-Quand la taille du L1 augmente, les taux de défauts I/D diminuent nettement, ce qui réduit le CPI et augmente l’IPC (amélioration plus marquée sur Dijkstra, plus sensible à la mémoire). Les métriques de prédiction de branchement restent globalement stables, ce qui est attendu car le prédicteur ne change pas entre configurations. Pour le Cortex-A7, la meilleure performance observée est obtenue avec \textbf{L1 = 16\,kB} pour Dijkstra (small et large) et pour Blowfish (CPI minimal et IPC maximal, avec un gain qui se stabilise entre 8\,kB et 16\,kB).
+Pour les impl\'ementations sur Cortex-A7, et plus particuli\`erement dans le cas des applications bas\'ees sur l’algorithme de Dijkstra, on observe, aussi bien pour le \emph{large} que pour le \emph{small}, une zone critique comprise entre 1~kB et 4~kB, dans laquelle les gains d’IPC li\'es \`a l’augmentation de la taille du cache L1 sont rapides. Cette zone correspond \`a la transition entre un L1 trop petit pour contenir les principales structures de donn\'ees, et un L1 suffisamment grand pour supporter les acc\`es r\'ep\'et\'es, principalement sur les donn\'ees, au cours de l’ex\'ecution de l’application.
 
-\paragraph{Gains relatifs (IPC et miss rates).}
-Les pourcentages ci-dessous sont calculés par rapport à la plus petite taille de L1 (A7~: 1\,kB, A15~: 2\,kB).
+On constate qu’\`a 8~kB appara\^it un point d’inflexion, o\`u l’am\'elioration continue et atteint le saut de performance le plus notable par rapport \`a la taille de L1 pr\'ec\'edente. De plus, on observe que les am\'eliorations du cache d’instructions commencent \`a saturer, en atteignant un niveau de pertes minimal et un gain proche de 100\% par rapport \`a la configuration avec un L1 de 1~kB. Parall\`element, la diminution des pertes dans le cache de donn\'ees est la plus significative parmi les intervalles consid\'er\'es, puis elle commence \`a montrer un comportement de saturation en suivant la trajectoire des gains.
 
-\begin{table}[h]
-\centering
-\footnotesize
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{l|c|c|c}
-\hline
-\textbf{L1} & \textbf{Gain IPC (\%)} & \textbf{Baisse I-Cache (\%)} & \textbf{Baisse D-Cache (\%)} \\
-\hline
-1\,kB  & 0,00 & 0,00 & 0,00 \\
-2\,kB  & 4,43 & 18,49 & 25,57 \\
-4\,kB  & 9,32 & 50,43 & 44,39 \\
-8\,kB  & 18,83 & 93,89 & 74,00 \\
-16\,kB & 21,94 & 97,18 & 82,56 \\
-\hline
-\end{tabular}
-\caption{Dijkstra small (Cortex-A7) : gains relatifs par rapport à 1\,kB.}
-\end{table}
+Enfin, cette saturation se consolide vers 16~kB, o\`u les gains d’IPC dus \`a l’augmentation de la taille du L1 deviennent marginaux, et o\`u la r\'eduction des d\'efauts n’apporte plus que des am\'eliorations modestes. Ce comportement est coh\'erent avec la micro-architecture A7, qui poss\`ede des buffers plus modestes et une largeur d’ex\'ecution plus r\'eduite : lorsque le L1 est trop petit, chaque d\'efaut se traduit par un blocage visible de la cha\^\i ne de traitement, mais d\`es que les structures de travail tiennent majoritairement dans le cache, les limites se d\'eplacent vers le d\'ebit de calcul plut\^ot que vers la m\'emoire. Il convient \'egalement de souligner qu’il devient \'evident qu’il existe une d\'ependance entre l’impact des branchements et la taille du cache L1. Ce r\'esultat est attendu, dans la mesure o\`u le comportement des branchements d\'epend du pr\'edicteur de branchement.
 
-\begin{table}[h]
-\centering
-\footnotesize
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{l|c|c|c}
-\hline
-\textbf{L1} & \textbf{Gain IPC (\%)} & \textbf{Baisse I-Cache (\%)} & \textbf{Baisse D-Cache (\%)} \\
-\hline
-1\,kB  & 0,00 & 0,00 & 0,00 \\
-2\,kB  & 3,43 & 26,98 & 18,34 \\
-4\,kB  & 7,98 & 61,60 & 36,36 \\
-8\,kB  & 17,30 & 93,53 & 67,42 \\
-16\,kB & 20,41 & 97,53 & 76,55 \\
-\hline
-\end{tabular}
-\caption{Dijkstra large (Cortex-A7) : gains relatifs par rapport à 1\,kB.}
-\end{table}
+De mani\`ere compl\'ementaire, on voit que, dans le cas du Dijkstra \emph{small}, la perte de cache de donn\'ees est plus faible que pour le \emph{large}, ce qui est un r\'esultat attendu, puisque, pour le \emph{large}, le \emph{working set} de donn\'ees d\'epasse plus rapidement la capacit\'e minimale, ce qui accentue les d\'efauts pour les petites tailles. Il faut aussi tenir compte de la taille de ligne de 32~octets sur A7 : ce choix favorise la localit\'e spatiale sans trop p\'enaliser les conflits, mais il limite la quantit\'e de donn\'ees captur\'ees par chaque remplissage, ce qui rend les petites tailles de cache plus sensibles aux acc\`es \`a pas irr\'egulier.
 
-\begin{table}[h]
-\centering
-\footnotesize
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{l|c|c|c}
-\hline
-\textbf{L1} & \textbf{Gain IPC (\%)} & \textbf{Baisse I-Cache (\%)} & \textbf{Baisse D-Cache (\%)} \\
-\hline
-1\,kB  & 0,00 & 0,00 & 0,00 \\
-2\,kB  & 0,30 & 18,35 & 9,22 \\
-4\,kB  & 0,77 & 32,49 & 12,95 \\
-8\,kB  & 1,09 & 42,13 & 14,55 \\
-16\,kB & 1,09 & 46,12 & 16,00 \\
-\hline
-\end{tabular}
-\caption{Blowfish (Cortex-A7) : gains relatifs par rapport à 1\,kB.}
-\end{table}
+L’associativit\'e 2-ways r\'eduit une partie des conflits, mais elle ne suffit pas \`a \'eliminer les collisions lorsque des structures cha\^\i n\'ees ou des tables de distances sont activement parcourues ; l’augmentation de la taille agit donc \`a la fois sur la capacit\'e et sur la probabilit\'e de conflit, d’o\`u la baisse rapide des d\'efauts dans la zone critique. On observe aussi que l’am\'elioration de la I-cache est plus rapide que celle de la D-cache, ce qui confirme que, pour Dijkstra, la performance est principalement limit\'ee par les donn\'ees et non par l’\emph{instruction fetch}, une fois que le code chaud est captur\'e.
 
-\begin{table}[h]
-\centering
-\footnotesize
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{l|c|c|c}
-\hline
-\textbf{L1} & \textbf{Gain IPC (\%)} & \textbf{Baisse I-Cache (\%)} & \textbf{Baisse D-Cache (\%)} \\
-\hline
-2\,kB  & 0,00 & 0,00 & 0,00 \\
-4\,kB  & 11,93 & 33,55 & 29,60 \\
-8\,kB  & 45,65 & 88,50 & 66,72 \\
-16\,kB & 57,78 & 94,12 & 78,31 \\
-32\,kB & 77,22 & 96,68 & 93,35 \\
-\hline
-\end{tabular}
-\caption{Dijkstra small (Cortex-A15) : gains relatifs par rapport à 2\,kB.}
-\end{table}
 
-\begin{table}[h]
-\centering
-\footnotesize
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{l|c|c|c}
-\hline
-\textbf{L1} & \textbf{Gain IPC (\%)} & \textbf{Baisse I-Cache (\%)} & \textbf{Baisse D-Cache (\%)} \\
-\hline
-2\,kB  & 0,00 & 0,00 & 0,00 \\
-4\,kB  & 10,22 & 44,19 & 22,65 \\
-8\,kB  & 38,89 & 88,88 & 59,19 \\
-16\,kB & 50,63 & 94,82 & 71,40 \\
-32\,kB & 75,64 & 97,53 & 90,66 \\
-\hline
-\end{tabular}
-\caption{Dijkstra large (Cortex-A15) : gains relatifs par rapport à 2\,kB.}
-\end{table}
+De son c\^ot\'e, dans le cas de Blowfish sur le m\^eme Cortex-A7, la compacit\'e du code et la localit\'e des donn\'ees exploit\'ees par l’algorithme ont un effet clair sur la dynamique de diminution des pertes, principalement au niveau du cache de donn\'ees, en comparaison avec la dynamique observ\'ee pour Dijkstra. Aussi bien pour Blowfish \emph{large} que pour Blowfish \emph{small}, on met en \'evidence une zone critique d’am\'elioration lorsque la taille du cache augmente de 1~kB \`a 4~kB.
 
-\begin{table}[h]
-\centering
-\footnotesize
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{l|c|c|c}
-\hline
-\textbf{L1} & \textbf{Gain IPC (\%)} & \textbf{Baisse I-Cache (\%)} & \textbf{Baisse D-Cache (\%)} \\
-\hline
-2\,kB  & 0,00 & 0,00 & 0,00 \\
-4\,kB  & 0,99 & 20,70 & 6,21 \\
-8\,kB  & 1,37 & 34,06 & 8,79 \\
-16\,kB & 1,42 & 40,90 & 9,91 \\
-32\,kB & 1,49 & 44,38 & 10,91 \\
-\hline
-\end{tabular}
-\caption{Blowfish (Cortex-A15) : gains relatifs par rapport à 2\,kB.}
-\end{table}
+On observe \'egalement une zone d’inflexion marqu\'ee autour d’une taille de 8~kB, pour laquelle on atteint la plus grande diff\'erence en gain d’IPC et la plus forte diminution des pertes, en particulier pour le cache de donn\'ees, par rapport \`a la taille de cache imm\'ediatement pr\'ec\'edente. Au-del\`a de 8~kB, une saturation du syst\`eme devient visible, avec des gains d’IPC marginaux et pratiquement n\'egligeables. Cette dynamique, comme dans le cas de Dijkstra, est d\'etermin\'ee par la saturation des diminutions de pertes en cache.
 
-Pour le Cortex-A7, les résultats issus des simulations montrent une progression très nette des performances lorsque la taille du cache L1 augmente, mais cette progression n’est ni linéaire ni illimitée. En prenant la plus petite taille comme référence, on observe d’abord une zone critique très marquée entre 1\,kB et 4\,kB, où les gains d’IPC sont rapides et où les miss rates d’instruction et de données chutent fortement. Cette zone critique correspond à la transition entre un L1 trop petit pour contenir le code chaud et les structures de travail principales, et un L1 suffisamment grand pour absorber une partie significative des accès répétitifs. Le point d’inflexion apparaît ensuite autour de 8\,kB : l’amélioration continue, mais la pente diminue clairement, ce qui signifie que le cache commence à capturer l’essentiel des réutilisations utiles. La saturation se constate vers 16\,kB, où les gains d’IPC supplémentaires deviennent marginaux et où la réduction des défauts n’apporte plus que des améliorations modestes. Ce comportement est cohérent avec la micro-architecture A7, qui possède des buffers plus modestes et une largeur d’exécution plus réduite : lorsque le L1 est trop petit, chaque défaut se traduit par un blocage visible de la chaîne de traitement, mais dès que les structures de travail tiennent majoritairement dans le cache, les limites se déplacent vers le débit de calcul plutôt que vers la mémoire. Pour Dijkstra, la sensibilité est particulièrement forte car l’algorithme manipule des structures de graphes et des files de priorité, avec des accès irréguliers à des nœuds et à des poids d’arêtes. Ce motif introduit beaucoup de défauts de données lorsque la capacité est faible, et c’est pourquoi la diminution des miss rates D-cache est spectaculaire en passant de 1\,kB à 8\,kB. La baisse des miss rates I-cache est également importante, mais elle se stabilise plus tôt, car le noyau de Dijkstra repose sur un ensemble d’instructions relativement compact ; une fois ce noyau en cache, le gain est surtout lié au data working set. La distinction entre Dijkstra small et Dijkstra large renforce cette lecture : dans les deux cas, la zone critique est similaire, mais l’instance large profite davantage des augmentations initiales parce que son working set de données dépasse plus vite la capacité minimale, ce qui accentue les défauts pour les petites tailles. En revanche, au-delà de 8\,kB, les courbes des deux jeux de données s’aplanissent, signe que les conflits et défauts de capacité résiduels deviennent moins dominants que le coût intrinsèque des calculs et du contrôle de flux. Il faut aussi tenir compte de la taille de ligne de 32 octets sur A7 : ce choix favorise la localité spatiale sans trop pénaliser les conflits, mais il limite la quantité de données capturées par chaque remplissage, ce qui rend les petites tailles de cache plus sensibles aux accès à pas irrégulier. L’associativité 2-ways réduit une partie des conflits, mais elle ne suffit pas à éliminer les collisions lorsque des structures chaînées ou des tables de distances sont activement parcourues ; l’augmentation de la taille agit donc à la fois sur la capacité et sur la probabilité de conflit, d’où la baisse rapide des défauts dans la zone critique. On observe aussi que l’amélioration de la I-cache est plus rapide que celle de la D-cache, ce qui confirme que, pour Dijkstra, la performance est principalement limitée par les données et non par l’instruction fetch, une fois le code chaud capturé.
+N\'eanmoins, en raison des conditions d\'ej\`a mentionn\'ees de localit\'e et des modes d’acc\`es et de stockage en m\'emoire propres \`a cet algorithme, on constate que, du c\^ot\'e du cache d’instructions, le niveau de saturation est atteint pour des tailles de cache plus petites. De plus, pour les pertes du cache de donn\'ees, Blowfish obtient de meilleurs r\'esultats que Dijkstra \`a taille de cache identique, en atteignant une diminution de 90{,}44\% par rapport \`a l’architecture avec un L1 de 1~kB. L’effet de la taille du cache sur les branchements, comme dans le cas de Dijkstra, ne pr\'esente pas de relation directe avec la taille du cache.
 
-Pour Blowfish sur A7, les résultats sont beaucoup plus modérés, ce qui est logique pour un algorithme de chiffrement symétrique qui effectue un grand nombre d’opérations arithmétiques régulières sur des blocs relativement petits. Le code est compact, les tables d’expansion et de substitution tiennent assez rapidement en cache, et les accès aux données ont une bonne localité temporelle. Ainsi, la zone critique est courte, essentiellement entre 1\,kB et 4\,kB, et le point d’inflexion apparaît dès 4 à 8\,kB. La saturation est visible vers 8–16\,kB, où l’IPC varie très peu et où les diminutions de miss rates deviennent marginales. Dans ce contexte, l’augmentation du L1 ne peut pas compenser un goulet d’étranglement qui se situe davantage dans le débit de calcul et la structure du pipeline que dans la mémoire. Les métriques de prédiction de branchement restent quasiment constantes pour toutes les tailles, ce qui est attendu puisque le prédicteur est identique et que la dynamique des branches du programme ne change pas : la taille du L1 n’influence pas le nombre de branches ni leur difficulté intrinsèque, elle ne fait que réduire les stalls de fetch ou de données. Cela explique pourquoi les gains d’IPC se traduisent surtout par la disparition de stalls dus aux misses et non par une amélioration des comportements de contrôle. Au niveau micro-architectural, le Cortex-A7, avec sa largeur d’exécution plus faible, bénéficie davantage de la réduction des latences mémoire relatives : un défaut de cache occupe une proportion plus importante du temps de cycle effectif, et chaque réduction de miss rate se reflète donc de manière visible sur l’IPC. Mais une fois que le cache est suffisamment grand, les pertes restantes proviennent de limites structurelles (largeur d’issue, profondeur des files, contraintes de bande passante interne), qui ne sont pas affectées par la taille du L1. Pour Blowfish, la taille de ligne de 32 octets est déjà suffisante pour amortir les accès séquentiels, et les données manipulées restent limitées à quelques tables et blocs d’entrée, ce qui explique la rapide saturation observée. En résumé, pour A7, la zone critique est très claire et l’effet de saturation est rapide, ce qui suggère qu’un dimensionnement modéré du L1 est déjà suffisant pour capter l’essentiel des bénéfices sur Dijkstra et qu’au-delà de 8–16\,kB, les gains deviennent coûteux par rapport à la surface.
+Une observation que l’on peut formuler concernant le comportement des algorithmes pour diff\'erentes tailles de cache est qu’elle met en \'evidence que le goulot d’\'etranglement de l’impl\'ementation n’\'etait pas n\'ecessairement li\'e aux limitations m\'emoire. En effet, en ne faisant varier que les caches, on atteint une saturation des am\'eliorations d’IPC pour des valeurs proches de seulement 20\% par rapport \`a la configuration de base, tandis que la variation r\'esultant du traitement du parall\'elisme sur A15, compar\'e \`a A7, produit des r\'esultats beaucoup plus importants en termes d’IPC.
 
-Pour le Cortex-A15, les tendances sont similaires mais amplifiées, avec des gains plus élevés sur la performance lorsque la taille du L1 augmente. La zone critique se situe ici entre 2\,kB et 8\,kB : l’IPC progresse fortement et les miss rates en I-cache et D-cache chutent de manière drastique. Le point d’inflexion apparaît autour de 8–16\,kB, et la saturation devient nette vers 32\,kB. Cette différence par rapport au Cortex-A7 s’explique par une micro-architecture plus agressive, dotée d’une largeur d’exécution plus importante, de buffers plus profonds et d’une capacité supérieure à exploiter le parallélisme d’instruction. Dans ces conditions, la latence mémoire devient un frein majeur dès que le cache est trop petit, car le cœur a la capacité de remplir rapidement ses fenêtres d’instruction et d’exposer davantage de dépendances mémoire. Un L1 plus grand réduit ces latences apparentes et permet au cœur de maintenir un débit élevé, d’où les gains d’IPC plus importants observés pour Dijkstra. Les diminutions de miss rates suivent aussi une courbe caractéristique : la I-cache bénéficie très tôt de l’augmentation de capacité, car le code critique est rapidement capturé ; la D-cache continue à s’améliorer jusqu’à 16\,kB et au-delà, car Dijkstra, avec ses accès irréguliers et son working set de données dispersé, génère de nombreux défauts de capacité et de conflit lorsque le cache est trop petit. La présence d’un bloc de 64 octets sur A15 augmente l’efficacité de la localité spatiale pour certains accès séquentiels, ce qui peut contribuer à accélérer la baisse des miss rates pour des tailles intermédiaires. Cette taille de ligne plus large peut toutefois amplifier le coût d’un miss individuel, ce qui rend la zone critique particulièrement sensible au dimensionnement du L1. L’associativité 2-ways réduit une partie des conflits, mais la densité d’accès du jeu de données large fait encore apparaître des collisions lorsque le cache est trop petit, d’où les gains importants observés entre 2\,kB et 8\,kB. La distinction entre Dijkstra small et Dijkstra large reste visible : le jeu de données large profite davantage des tailles intermédiaires, mais la convergence vers la saturation se produit dans les deux cas, indiquant que la majeure partie du working set pertinent finit par être contenue dans le L1 ou par être amortie par les mécanismes de prédiction et de préchargement implicites du pipeline.
+Ce constat renforce l’appr\'eciation initiale selon laquelle la classe dominante d’instructions dans les applications correspond effectivement aux op\'erations de calcul entier. On propose donc d’analyser les comportements des algorithmes sur Cortex-A15 afin d’\'evaluer l’hypoth\`ese formul\'ee.
 
-Pour Blowfish sur A15, les gains restent modestes, bien que légèrement supérieurs à ceux observés sur A7. La zone critique est surtout entre 2\,kB et 4\,kB, avec un point d’inflexion vers 8\,kB, puis une saturation marquée entre 16 et 32\,kB. Cela s’explique par la nature essentiellement calculatoire de l’algorithme et par la régularité de ses accès, qui rendent les défauts de cache moins fréquents une fois une petite capacité disponible. Le cœur A15, plus performant en calcul, peut absorber davantage d’instructions par cycle, mais il n’y a pas suffisamment de pression mémoire pour justifier un L1 très grand ; l’amélioration supplémentaire apportée par la taille se traduit donc par des gains d’IPC très limités. Les mesures de prédiction de branchement restent stables, comme pour A7, ce qui confirme que les variations de performance proviennent principalement des effets de capacité mémoire et non d’un changement de comportement de contrôle. En pratique, l’augmentation de L1 au-delà de 8–16\,kB pour Blowfish n’apporte qu’un rendement décroissant, ce qui est cohérent avec un code compact et un jeu de données qui tient rapidement en cache. Dans un contexte micro-architectural plus large, il faut aussi considérer que le A15 dispose de plus de ressources pour masquer certaines latences, par exemple grâce à une fenêtre d’instruction plus grande et à des files de chargement plus profondes. Cela signifie que la baisse des miss rates se traduit plus directement en IPC lorsque le cache est petit, mais que l’effet marginal diminue quand les autres ressources deviennent le facteur limitant. En synthèse, le Cortex-A15 bénéficie fortement d’un L1 suffisamment dimensionné pour Dijkstra, où la zone critique et le point d’inflexion montrent que la mémoire est le facteur limitant, alors que pour Blowfish, le facteur dominant reste le calcul, et l’augmentation de L1 a un impact limité. Cette lecture met en évidence une logique d’optimisation différenciée : un L1 plus grand est pertinent lorsque la charge de travail présente des accès irréguliers et une faible localité de données, tandis qu’une charge plus régulière et calculatoire atteint rapidement la saturation, rendant l’augmentation de capacité moins justifiable en termes de surface et d’énergie. Enfin, la cohérence des tendances sur A15 indique que le comportement est robuste à la variation de taille et qu’il est possible d’identifier un compromis autour de 16\,kB qui offre un bon équilibre entre gain de performance et coût en surface, même si la saturation finale se situe vers 32\,kB. On peut également interpréter ces tendances au regard de la hiérarchie mémoire globale : lorsque le L1 est petit, la D-cache délègue plus souvent vers le L2, et même si le L2 présente des taux de défauts faibles, la simple latence d’accès suffit à dégrader l’IPC sur un cœur aussi large. À l’inverse, quand le L1 grossit, la pression sur le L2 diminue, ce qui stabilise le temps de service et rend les files de chargement moins congestionnées. Cette stabilisation réduit aussi les variations d’IPC entre exécutions, signe que la phase de calcul redevient dominante. Du point de vue de l’efficacité surfacique, ces gains ont un coût : un L1 plus grand augmente la surface et la consommation, et l’intérêt marginal de passer de 16\,kB à 32\,kB est relativement faible pour Blowfish et modéré pour Dijkstra. Ainsi, si l’objectif est un compromis performance-surface, on peut justifier un L1 intermédiaire, tandis que si l’objectif est de maximiser la performance absolue sur des charges mémoire, la taille maximale reste préférable malgré la saturation progressive.
+En somme, en tenant compte de l’effet de saturation observ\'e en fonction de la taille du L1, la configuration retenue est de 8~kB. Il s’agit du ``sweet spot'' offrant le meilleur compromis performance/surface pour ce profil architectural, et ce, pour les deux applications.
+
+\input{sections/CacheL1_gains_tables.tex}
+
+Pour le Cortex-A15, les tendances observ\'ees, une fois l’optimisation du traitement des op\'erations du c\oe{}ur d\'ej\`a mise en place, deviennent plus marqu\'ees : la comparaison de l’IPC entre les deux Cortex (A15 et A7) montre des gains plus \'elev\'es lorsque l’on impl\'emente un L1 de plus grande taille. Dans ces cas, la zone critique s’\'etend typiquement de 2~kB \`a 16~kB, avec une croissance de l’IPC et une augmentation du pourcentage de diminution des pertes sur les donn\'ees. Pour Dijkstra, on observe aussi qu’entre 16~kB et 32~kB, l’augmentation de l’IPC est tr\`es significative, accompagn\'ee d’une diminution notable des \emph{misses} de donn\'ees en cache, ce qui est particuli\`erement important pour Dijkstra compte tenu de la mani\`ere dont les acc\`es m\'emoire se produisent, en lien avec les structures de donn\'ees employ\'ees par l’algorithme.
+
+Cette diff\'erence par rapport au Cortex-A7 s’explique par une micro-architecture plus agressive, dot\'ee d’une largeur d’ex\'ecution plus importante, de buffers plus profonds et d’une capacit\'e sup\'erieure \`a exploiter le parall\'elisme d’instruction. Dans ces conditions, la latence m\'emoire devient un frein majeur d\`es que le cache est trop petit, car le c\oe{}ur a la capacit\'e de remplir rapidement ses fen\^etres d’instruction et d’exposer davantage de d\'ependances m\'emoire. Un L1 plus grand r\'eduit ces latences apparentes et permet au c\oe{}ur de maintenir un d\'ebit \'elev\'e, d’o\`u les gains d’IPC plus importants observ\'es pour Dijkstra.
+
+Les diminutions de taux de \emph{miss} suivent aussi une courbe caract\'eristique : la I-cache b\'en\'eficie tr\`es t\^ot de l’augmentation de capacit\'e, car le code critique est rapidement captur\'e ; la D-cache continue \`a s’am\'eliorer jusqu’\`a 16~kB et au-del\`a, car Dijkstra, avec ses acc\`es irr\'eguliers et son \emph{working set} de donn\'ees dispers\'e, g\'en\`ere de nombreux d\'efauts de capacit\'e et de conflit lorsque le cache est trop petit.
+
+La pr\'esence d’une ligne de 64~octets sur A15 augmente l’efficacit\'e de la localit\'e spatiale pour certains acc\`es s\'equentiels, ce qui peut contribuer \`a acc\'el\'erer la baisse des taux de \emph{miss} pour des tailles interm\'ediaires. Cette taille de ligne plus large peut toutefois amplifier le co\^ut d’un \emph{miss} individuel, ce qui rend la zone critique particuli\`erement sensible au dimensionnement du L1. L’associativit\'e 2-ways r\'eduit une partie des conflits, mais la densit\'e d’acc\`es du jeu de donn\'ees \emph{large} fait encore appara\^\i tre des collisions lorsque le cache est trop petit, d’o\`u les gains importants observ\'es entre 2~kB et 8~kB.
+
+La distinction entre Dijkstra \emph{small} et Dijkstra \emph{large} reste visible : le jeu de donn\'ees \emph{large} profite davantage des tailles interm\'ediaires, mais la convergence vers la saturation se produit dans les deux cas, indiquant que la majeure partie du \emph{working set} pertinent finit par \^etre contenue dans le L1 ou par \^etre amortie par les m\'ecanismes de pr\'ediction et de pr\'echargement implicites du pipeline.
+
+Dans le cas de Blowfish, le comportement est similaire \`a celui de Dijkstra, dans le sens o\`u l’augmentation de l’IPC se maintient jusqu’\`a atteindre un point d’inflexion apparent autour de 32~kB. \`A partir de cette taille, la saturation de la diminution des pertes dans la D-cache laisse pr\'evoir un ralentissement, voire un stagnation, des gains d’IPC. N\'eanmoins, il convient de souligner que, bien que les gains soient sup\'erieurs \`a ceux obtenus sur A7, ils n’atteignent qu’environ 40\% par rapport \`a l’IPC de la configuration de r\'ef\'erence avec un L1 de 1~kB.
+
+Cela s’explique par la nature essentiellement calculatoire de l’algorithme et par la r\'egularit\'e de ses acc\`es, qui rendent les d\'efauts de cache moins fr\'equents d\`es qu’une petite capacit\'e est disponible ; l’augmentation de L1 a donc un impact limit\'e. Cette lecture met en \'evidence une logique d’optimisation diff\'erenci\'ee : un L1 plus grand est pertinent lorsque la charge de travail pr\'esente des acc\`es irr\'eguliers et une faible localit\'e de donn\'ees, tandis qu’une charge plus r\'eguli\`ere et calculatoire atteint rapidement la saturation, rendant l’augmentation de capacit\'e moins justifiable en termes de surface et d’\'energie.
+
+La coh\'erence des tendances sur A15 indique que le comportement est robuste \`a la variation de taille et qu’il est possible d’identifier un compromis autour de 16~kB offrant un bon \'equilibre entre gain de performance et co\^ut en surface, m\^eme si la saturation finale se situe vers 32~kB. On peut \'egalement interpr\'eter ces tendances au regard de la hi\'erarchie m\'emoire globale : lorsque le L1 est petit, la D-cache d\'el\`egue plus souvent vers le L2, et m\^eme si le L2 pr\'esente des taux de d\'efauts faibles, la simple latence d’acc\`es suffit \`a d\'egrader l’IPC sur un c\oe{}ur aussi large. \`A l’inverse, quand le L1 augmente, la pression sur le L2 diminue, ce qui stabilise le temps de service et rend les files de chargement moins congestionn\'ees. Cette stabilisation r\'eduit aussi les variations d’IPC entre ex\'ecutions, signe que la phase de calcul redevient dominante.
+
+En somme, en tenant compte de l’effet de saturation observ\'e en fonction de la taille du L1, la configuration retenue est de 32~kB. Il s’agit du pointe offrant le meilleur compromis performance/surface pour ce profil architectural, et ce, pour les deux applications.
