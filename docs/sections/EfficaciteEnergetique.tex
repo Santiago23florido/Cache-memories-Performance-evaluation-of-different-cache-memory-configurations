@@ -1,47 +1,38 @@
-\paragraph{Efficacité surfacique.}
-On utilise les IPC issus des fichiers CSV (par processus et par taille de L1) et la surface
-totale du cœur avec L2 fixe (512\,kB) :
-\[
-\eta = \frac{IPC}{S_{\text{total}}}\quad\text{avec}\quad
-S_{\text{total}} = S_{\text{core hors L1}} + 2S_{L1} + S_{L2}.
-\]
-Ici $S_{L2}(A7)=0{,}94241$~mm$^2$ et $S_{L2}(A15)=0{,}94019$~mm$^2$.
-Les valeurs suivantes sont donc en $IPC/\text{mm}^2$.
+\subsection{Efficacité énergetique.}
 
-\begin{table}[h]
-\centering
-\footnotesize
-\begin{tabular}{c|cccc}
-\hline
-\textbf{L1 (kB)} & \textbf{Dijkstra small} & \textbf{Dijkstra large} & \textbf{Blowfish small} & \textbf{Blowfish large} \\
-\hline
-\multicolumn{5}{c}{\textbf{Cortex-A7}}\\
-1  & --      & --      & --      & -- \\
-2  & 0,1787  & 0,1778  & 0,1859  & 0,1902 \\
-4  & 0,1860  & 0,1846  & 0,1943  & 0,1983 \\
-8  & 0,2006  & 0,1989  & 0,2127  & 0,2162 \\
-16 & 0,2025  & 0,2009  & 0,2102  & 0,2138 \\
-\hline
-\end{tabular}
-\caption{Efficacité surfacique du Cortex-A7 (L2=512\,kB).}
-\end{table}
+Les consommations \'energ\'etiques du Cortex-A7 et du Cortex-A15 sont de 0{,}10~mW/MHz et 0{,}20~mW/MHz, respectivement. De plus, en technologie 28~nm, les fr\'equences maximales du Cortex-A7 et du Cortex-A15 sont de 1{,}0~GHz et 2{,}5~GHz, respectivement. La puissance \`a fr\'equence maximale pour chaque microprocesseur peut \^etre estim\'ee comme suit.
 
-\begin{table}[h]
-\centering
-\footnotesize
-\begin{tabular}{c|cccc}
-\hline
-\textbf{L1 (kB)} & \textbf{Dijkstra small} & \textbf{Dijkstra large} & \textbf{Blowfish small} & \textbf{Blowfish large} \\
-\hline
-\multicolumn{5}{c}{\textbf{Cortex-A15}}\\
-2  & 0,2249  & 0,2269  & 0,3487  & 0,3667 \\
-4  & 0,2516  & 0,2500  & 0,3710  & 0,3915 \\
-8  & 0,3253  & 0,3129  & 0,4444  & 0,4669 \\
-16 & 0,3516  & 0,3386  & 0,4523  & 0,4763 \\
-32 & 0,3908  & 0,3907  & 0,4820  & 0,5094 \\
-\hline
-\end{tabular}
-\caption{Efficacité surfacique du Cortex-A15 (L2=512\,kB).}
-\end{table}
+Le calcul de la puissance \`a fr\'equence maximale ($P_{\max}$) est donn\'e par l’\'equation \eqref{eq:pmax} :
+\begin{equation}
+P_{\max}=\left(\frac{\text{mW}}{\text{MHz}}\right)\times \left(\text{MHz}\right)
+\label{eq:pmax}
+\end{equation}
 
-\textit{Note :} CACTI ne fournit pas d’organisation valide pour A7 à 1\,kB, d’où ``--''.
+\noindent
+\textbf{1.~Cortex-A7 :} en appliquant l’\'equation \eqref{eq:pmax}, on obtient :
+\begin{equation}
+P_{A7}=0{,}10~\frac{\text{mW}}{\text{MHz}}\times 1000~\text{MHz}=100~\text{mW}
+\label{eq:pa7}
+\end{equation}
+
+\noindent
+\textbf{2.~Cortex-A15 :} de la m\^eme mani\`ere, on obtient :
+\begin{equation}
+P_{A15}=0{,}20~\frac{\text{mW}}{\text{MHz}}\times 2500~\text{MHz}=500~\text{mW}
+\label{eq:pa15}
+\end{equation}
+
+\`A partir de cette puissance \`a fr\'equence maximale, il est possible d’estimer l’efficacit\'e \'energ\'etique \`a l’aide de la formule donn\'ee \`a l’\'equation \eqref{eq:eff_energetique} :
+\begin{equation}
+E = \mathrm{IPC}\, P_{\max}
+\label{eq:eff_energetique}
+\end{equation}
+
+Cette expression est appliqu\'ee \`a toutes les applications, pour chacune des configurations dans lesquelles elles ont \'et\'e simul\'ees.
+
+
+\input{sections/EfficaciteEnergetique_tables.tex}
+
+On a conclu qu’en d\'efinissant l’efficacit\'e du projet \`a partir de l’IPC et de la puissance consomm\'ee \`a la fr\'equence maximale, on obtient les r\'esultats attendus. En effet, plus la taille du cache augmente, plus l’IPC s’am\'eliore et, avec un d\'enominateur constant (ou fix\'e), l’efficacit\'e \'energ\'etique augmente pour les deux microprocesseurs.
+
+Par ailleurs, il est important de souligner que, pour la plupart des tailles de cache comparables entre les deux architectures propos\'ees, l’efficacit\'e \'energ\'etique du microprocesseur A15 est inf\'erieure \`a celle du microprocesseur A7.

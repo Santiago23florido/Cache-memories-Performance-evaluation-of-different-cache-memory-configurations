@@ -1,0 +1,39 @@
+\begin{table}[h]
+\centering
+\footnotesize
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{c|c|c|c|c}
+\hline
+\textbf{L1 (kB)} & \textbf{Dijkstra small} & \textbf{Dijkstra large} & \textbf{Blowfish small} & \textbf{Blowfish large} \\
+\hline
+1  & 0,00232 & 0,00232 & 0,00245 & 0,00251 \\
+2  & 0,00244 & 0,00240 & 0,00251 & 0,00257 \\
+4  & 0,00254 & 0,00250 & 0,00264 & 0,00270 \\
+8  & 0,00275 & 0,00272 & 0,00291 & 0,00296 \\
+16  & 0,00283 & 0,00279 & 0,00293 & 0,00298 \\
+\hline
+\end{tabular}
+}
+\caption{Efficacite energetique (IPC/mW) pour Cortex-A7 ($P_{\max}$ = \mbox{100\,mW}).}
+\label{tab:eff-energetique-a7}
+\end{table}
+
+\begin{table}[h]
+\centering
+\footnotesize
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{c|c|c|c|c}
+\hline
+\textbf{L1 (kB)} & \textbf{Dijkstra small} & \textbf{Dijkstra large} & \textbf{Blowfish small} & \textbf{Blowfish large} \\
+\hline
+2  & 0,00130 & 0,00131 & 0,00201 & 0,00211 \\
+4  & 0,00145 & 0,00143 & 0,00214 & 0,00226 \\
+8  & 0,00190 & 0,00181 & 0,00258 & 0,00271 \\
+16  & 0,00207 & 0,00196 & 0,00263 & 0,00277 \\
+32  & 0,00232 & 0,00229 & 0,00283 & 0,00300 \\
+\hline
+\end{tabular}
+}
+\caption{Efficacite energetique (IPC/mW) pour Cortex-A15 ($P_{\max}$ = \mbox{500\,mW}).}
+\label{tab:eff-energetique-a15}
+\end{table}

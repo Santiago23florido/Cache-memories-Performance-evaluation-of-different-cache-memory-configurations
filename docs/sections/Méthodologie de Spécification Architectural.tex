@@ -1,0 +1,14 @@
+\subsection{Méthodologie de Spécification Architecturale}
+Pour sp\'ecifier une architecture d\'edi\'ee \`a un nouveau domaine (par exemple l’intelligence artificielle ou le traitement vid\'eo), nous proposons la m\'ethodologie rigoureuse suivante, d\'eriv\'ee de l’exp\'erience acquise lors de ce TP :
+
+\begin{enumerate}
+  \item \textbf{Caract\'erisation de la charge (\emph{profiling}).} Utiliser des outils comme Gem5 (mode atomique) pour extraire le ``mix d'instructions''.
+  
+  \textit{Objectif :} identifier si l’application est \emph{compute-bound} (n\'ecessitant des ALU/FPU plus larges) ou \emph{memory-bound} (n\'ecessitant des caches et de la bande passante).
+
+  \item \textbf{Exploration de l’espace de conception (\emph{Design Space Exploration}, DSE).} Automatiser les simulations (via des scripts Python/Bash comme dans ce TP) en faisant varier les param\`etres critiques : taille de cache, largeur de pipeline (\emph{issue width}), pr\'edicteurs de branchement. Mesurer l’IPC pour chaque point.
+
+  \item \textbf{Contraintes physiques (PPA : \emph{Power, Performance, Area}).} Mod\'eliser chaque configuration retenue avec un outil physique comme CACTI~7.0 (pour la surface et la latence) et McPAT (pour la puissance). Rejeter les configurations irr\'ealistes (par exemple, latence $>1$ cycle).
+
+  \item \textbf{Analyse de Pareto et choix final.} Tracer les courbes de compromis (par exemple, performance vs surface). S\'electionner les points du front de Pareto : ceux qui offrent le meilleur gain de performance pour un co\^ut marginal en surface/\`energie acceptable. \`A titre d’exemple dans ce TP, le passage de 16~kB \`a 32~kB sur le Cortex-A15 \'etait sur le front de Pareto (gain tr\`es important), alors que sur le Cortex-A7 il ne l’\'etait pas (gain n\'egligeable).
+\end{enumerate}

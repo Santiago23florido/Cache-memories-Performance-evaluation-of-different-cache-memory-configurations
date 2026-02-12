@@ -1,0 +1,96 @@
+Les r\'esultats sont pr\'esent\'es dans les Fig.~(\ref{fig:surfaces-l1l2-cortex-a7})-(\ref{fig:surfaces-l1l2-cortex-a15}).
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\linewidth]{figures/cacti/surfaces_A7.png}
+\caption{Surfaces L1, L2 et c\oe{}ur total pour Cortex-A7 (L2 = \mbox{512\,kB}).}
+\label{fig:surfaces-l1l2-cortex-a7}
+\end{figure}
+
+\begin{table}[h]
+\centering
+\footnotesize
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{c|c|c|c|c}
+\hline
+\textbf{L1 (kB)} & $S_{L1}$ (mm$^2$) & $S_{L1}^{tot}$ (mm$^2$) & $S_{L2}$ (mm$^2$) & $S_{\text{core+L1+L2}}$ (mm$^2$) \\
+\hline
+2  & 0,01719 & 0,03438 & 0,94241 & 1,29391 \\
+4  & 0,02094 & 0,04189 & 0,94241 & 1,30143 \\
+8  & 0,02652 & 0,05304 & 0,94241 & 1,31257 \\
+16  & 0,03774 & 0,07548 & 0,94241 & 1,33502 \\
+32  & 0,06644 & 0,13287 & 0,94241 & 1,39241 \\
+\hline
+\end{tabular}
+}
+\caption{Surfaces calculées pour Cortex-A7 (L1 variable, L2 = \mbox{512\,kB}).}
+\label{tab:surfaces-l1l2-cortex-a7}
+\end{table}
+
+\begin{table}[h]
+\centering
+\footnotesize
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{c|c|c|c|c}
+\hline
+\textbf{L1 (kB)} & \textbf{Dijkstra small} & \textbf{Dijkstra large} & \textbf{Blowfish small} & \textbf{Blowfish large} \\
+\hline
+2  & 0,18823 & 0,18549 & 0,19419 & 0,19858 \\
+4  & 0,19509 & 0,19230 & 0,20290 & 0,20709 \\
+8  & 0,20989 & 0,20703 & 0,22198 & 0,22564 \\
+16  & 0,21171 & 0,20889 & 0,21928 & 0,22296 \\
+32  & -- & -- & -- & -- \\
+\hline
+\end{tabular}
+}
+\caption{Efficacite surfacique (IPC/mm$^2$) pour Cortex-A7 (L2 = \mbox{512\,kB}).}
+\label{tab:eff-surface-cortex-a7}
+\end{table}
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\linewidth]{figures/cacti/surfaces_A15.png}
+\caption{Surfaces L1, L2 et c\oe{}ur total pour Cortex-A15 (L2 = \mbox{512\,kB}).}
+\label{fig:surfaces-l1l2-cortex-a15}
+\end{figure}
+
+\begin{table}[h]
+\centering
+\footnotesize
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{c|c|c|c|c}
+\hline
+\textbf{L1 (kB)} & $S_{L1}$ (mm$^2$) & $S_{L1}^{tot}$ (mm$^2$) & $S_{L2}$ (mm$^2$) & $S_{\text{core+L1+L2}}$ (mm$^2$) \\
+\hline
+2  & 0,00433 & 0,00867 & 0,60544 & 2,54772 \\
+4  & 0,00495 & 0,00990 & 0,60544 & 2,54895 \\
+8  & 0,01432 & 0,02865 & 0,60544 & 2,56770 \\
+16  & 0,01767 & 0,03534 & 0,60544 & 2,57439 \\
+32  & 0,03319 & 0,06639 & 0,60544 & 2,60544 \\
+\hline
+\end{tabular}
+}
+\caption{Surfaces calculées pour Cortex-A15 (L1 variable, L2 = \mbox{512\,kB}).}
+\label{tab:surfaces-l1l2-cortex-a15}
+\end{table}
+
+\begin{table}[h]
+\centering
+\footnotesize
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{c|c|c|c|c}
+\hline
+\textbf{L1 (kB)} & \textbf{Dijkstra small} & \textbf{Dijkstra large} & \textbf{Blowfish small} & \textbf{Blowfish large} \\
+\hline
+2  & 0,25483 & 0,25659 & 0,39457 & 0,41491 \\
+4  & 0,28392 & 0,28117 & 0,41976 & 0,44288 \\
+8  & 0,37084 & 0,35186 & 0,50237 & 0,52782 \\
+16  & 0,40214 & 0,38109 & 0,51116 & 0,53821 \\
+32  & 0,44478 & 0,43906 & 0,54390 & 0,57482 \\
+\hline
+\end{tabular}
+}
+\caption{Efficacite surfacique (IPC/mm$^2$) pour Cortex-A15 (L2 = \mbox{512\,kB}).}
+\label{tab:eff-surface-cortex-a15}
+\end{table}

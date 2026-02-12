@@ -1,0 +1,47 @@
+\subsection{Architecture système big.LITTLE}
+En s’inscrivant dans l’approche ARM \emph{big.LITTLE}, on propose de s\'electionner, pour chacune des applications, une configuration de cache L1 pouvant \^etre int\'egr\'ee dans chaque cluster, en traitant les applications s\'epar\'ement. Cette s\'election s’appuie sur les r\'esultats d’efficacit\'e \'energ\'etique obtenus pour les diff\'erentes configurations, pour chacune des applications.
+\subsubsection{Dijkstra big.LITTLE}
+Ainsi, dans le cas de Dijkstra, pour le cluster \emph{little}, c’est-\`a-dire le Cortex-A7, on propose une configuration avec une I-cache et une D-cache de 16~kB. En effet, c’est \`a 16~kB de D-L1 que l’on obtient la meilleure efficacit\'e \'energ\'etique ainsi que la meilleure efficacit\'e surfacique, aussi bien pour Dijkstra \emph{Small} que pour Dijkstra \emph{Large}.
+
+Il convient de souligner que ces r\'esultats sont coh\'erents avec ceux obtenus lors de l’analyse de performance du Cortex-A7 face aux variations de la taille du cache pour Dijkstra. N\'eanmoins, une nuance m\'erite d’\^etre prise en compte. Lors de l’analyse de Dijkstra \emph{Small} et \emph{Large}, on a observ\'e que le gain d’IPC entre un L1 de 8~kB et un L1 de 16~kB n’est pas suffisamment significatif pour constituer un crit\`ere d\'eterminant en termes de performance.
+
+Cela s’explique par le fait qu’un point d’inflexion appara\^\i t autour de 8~kB et qu’\`a partir de 16~kB la progression de l’IPC commence \`a saturer. Par cons\'equent, puisque les diff\'erences d’efficacit\'e surfacique et d’efficacit\'e \'energ\'etique entre 8~kB et 16~kB ne sont pas consid\'erables (les valeurs \'etant tr\`es proches), la s\'election entre ces deux tailles peut \^etre laiss\'ee \`a d’autres crit\`eres de conception, notamment des consid\'erations de co\^ut pour le fabricant ou des besoins sp\'ecifiques. En effet, les performances en simulation sont tr\`es similaires et, de plus, les indicateurs d’efficacit\'e surfacique et d’efficacit\'e \'energ\'etique restent tr\`es proches l’un de l’autre.
+
+Pour le cluster \emph{big}, c’est-\`a-dire le processeur Cortex-A15, dans le cas particulier de l’application Dijkstra, on propose une configuration de 32~kB pour le cache d’instructions et le cache de donn\'ees, principalement pour trois raisons.
+
+Premi\`erement, c’est avec cette configuration que l’on atteint la meilleure efficacit\'e surfacique parmi toutes les configurations \'evalu\'ees pour cette application sur Cortex-A15. Deuxi\`emement, il s’agit \'egalement de la configuration offrant la meilleure efficacit\'e \'energ\'etique pour ce microprocesseur et cette application, ce qui est coh\'erent avec les r\'esultats de performance obtenus pour Dijkstra \emph{Large} et \emph{Small}. Troisi\`emement, la hausse de l’IPC atteint 74{,}99\% lorsque la taille du cache est de 32~kB, et l’on n’observe pas encore une saturation compl\`ete de la diminution des pertes, en particulier pour la D-cache. Or, pour cette configuration et sur ce microprocesseur, c’est pr\'ecis\'ement la r\'eduction des pertes en D-cache qui constitue la source principale du gain d’IPC.
+
+Par cons\'equent, cette configuration repr\'esente l’option recommand\'ee : elle maximise non seulement le gain d’IPC, mais aussi la diminution des pertes en cache de donn\'ees et en cache d’instructions, tout en maximisant l’efficacit\'e \'energ\'etique et l’efficacit\'e surfacique.
+\subsubsection{Blowfish big.LITTLE}
+Dans le cas sp\'ecifique des applications Blowfish, \emph{Small} comme \emph{Large}, sur le cluster \emph{little} (Cortex-A7), on obtient une situation particuli\`ere. En effet, l’efficacit\'e surfacique maximale est atteinte avec une configuration de cache de 8~kB, tandis que l’efficacit\'e \'energ\'etique maximale, dans le cadre d’une puissance suppos\'ee constante \`a la fr\'equence maximale de fonctionnement du microprocesseur, est obtenue avec une configuration de 16~kB.
+
+Par cons\'equent, un troisi\`eme crit\`ere est retenu pour s\'electionner la configuration recommand\'ee : le comportement en performance observ\'e lors de l’analyse du microprocesseur face \`a cette application pour diff\'erentes tailles de cache. On avait montr\'e qu’\`a partir de 8~kB, un point d’inflexion est atteint et qu’augmenter la taille du cache ne produit plus de gains significatifs en termes d’IPC. De plus, on observe une saturation \`a la fois de la diminution des pertes en I-cache et de la diminution des pertes en D-cache, ce qui rend peu pertinent, du point de vue des performances applicatives, d’int\'egrer une configuration \`a cache plus grand.
+
+C’est pourquoi, pour Blowfish sur Cortex-A7, on recommande une configuration de 8~kB pour la I-cache et de 8~kB pour la D-cache.
+
+Pour Blowfish sur le cluster \emph{big} (Cortex-A15), la configuration recommand\'ee est de 32~kB pour la I-cache et 32~kB pour la D-cache, pour trois raisons principales.
+
+Premi\`erement, avec cette configuration, on obtient la meilleure efficacit\'e surfacique, dans le cadre d’une puissance suppos\'ee constante \`a la fr\'equence maximale. Deuxi\`emement, cette m\^eme configuration pr\'esente aussi la meilleure efficacit\'e \'energ\'etique pour cette application, aussi bien en version \emph{Small} qu’en version \emph{Large}. Enfin, ces r\'esultats sont coh\'erents avec l’analyse de performance, qui montre que le gain d’IPC continue jusqu’\`a la configuration L1 de 32~kB, atteignant une am\'elioration de 41{,}68\%. Bien que cette taille mette en \'evidence une certaine saturation de la diminution des pertes en D-cache et en I-cache, elle ne montre pas encore une saturation (ou un \'etat de stagnation) du gain d’IPC.
+
+Par cons\'equent, il reste pertinent, en termes de performance, de mettre en \oe{}uvre un cache de 32~kB plut\^ot qu’un cache de 16~kB. Ce dernier n’apporte qu’un gain d’IPC de 31{,}017\%, soit environ 10 points de pourcentage de moins. L’ensemble de ces \'el\'ements renforce ainsi la d\'ecision retenue pr\'ec\'edemment.
+
+
+
+
+
+
+
+
+
+
+Dans le cas des configurations du cluster \emph{big}, elles sont \'equivalentes pour Blowfish comme pour Dijkstra. Cela s’explique par le fait que, dans les deux applications, le goulot d’\'etranglement se situait principalement au niveau des instructions de calcul entier. Ainsi, l’impl\'ementation du Cortex-A15 et sa capacit\'e \`a traiter davantage d’instructions en parall\`ele permettent des am\'eliorations d’IPC consid\'erables, ce qui rend la dynamique d’am\'elioration des acc\`es aux donn\'ees en m\'emoire plus visible.
+
+M\^eme si la nature des structures de donn\'ees manipul\'ees et les modes d’acc\`es \`a la m\'emoire diff\`erent entre les deux algorithmes, les r\'esultats ne sont pas n\'ecessairement identiques, mais ils suivent un comportement incr\'emental du m\^eme type jusqu’\`a atteindre la configuration optimale retenue, \`a savoir 32~kB. N\'eanmoins, ces diff\'erences de structures et de sch\'emas d’acc\`es montrent qu’apr\`es l’adoption de ce microprocesseur, les gains d’IPC obtenus en augmentant la taille du cache sont plus repr\'esentatifs pour Dijkstra que pour Blowfish. Malgr\'e cela, les deux applications conservent la m\^eme taille optimale de cache, c’est-\`a-dire la configuration \`a 32~kB.
+
+De son c\^ot\'e, pour le cluster \emph{little}, la configuration de cache recommand\'ee n’est pas la m\^eme, en se basant principalement sur l’efficacit\'e surfacique. En effet, pour Blowfish \emph{Small} et \emph{Large} sur Cortex-A7, l’efficacit\'e surfacique est plus \'elev\'ee lorsque la configuration du cache est de 8~kB, ce qui diff\`ere des r\'esultats obtenus pour Dijkstra sur ce m\^eme microprocesseur. Par cons\'equent, la recommandation initiale est diff\'erente.
+
+N\'eanmoins, les performances obtenues avec les configurations \`a 8~kB restent comparables, et l’on pourrait m\^eme envisager l’utilisation d’une configuration de 8~kB pour Dijkstra. En effet, en termes de performance, une fois ce point d’inflexion d\'epass\'e, les gains d’IPC tendent \`a se saturer, ce qui rend les diff\'erences entre 8~kB et des tailles sup\'erieures moins marqu\'ees.
+
+Le point d’inflexion observ\'e pour Dijkstra autour de 8~kB sur Cortex-A7 s’interpr\`ete comme une forme de saturation des gains d’IPC. Par cons\'equent, l’\'ecart entre une configuration de 8~kB et une configuration de 16~kB n’est pas repr\'esentatif en termes de performance. De plus, l’efficacit\'e \'energ\'etique demeure \'egalement comparable entre ces deux tailles.
+
+Ainsi, m\^eme si la configuration recommand\'ee n’est pas strictement \'equivalente, il serait envisageable d’impl\'ementer Dijkstra avec une configuration de 8~kB sur Cortex-A7, puisqu’elle n’entra\^\i nerait ni un co\^ut important en performance, ni un co\^ut notable en efficacit\'e \'energ\'etique, par comparaison avec la configuration recommand\'ee.
