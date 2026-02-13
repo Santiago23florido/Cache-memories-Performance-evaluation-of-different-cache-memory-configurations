@@ -25,7 +25,7 @@ P_{A15}=0{,}20~\frac{\text{mW}}{\text{MHz}}\times 2500~\text{MHz}=500~\text{mW}
 
 \`A partir de cette puissance \`a fr\'equence maximale, il est possible d’estimer l’efficacit\'e \'energ\'etique \`a l’aide de la formule donn\'ee \`a l’\'equation \eqref{eq:eff_energetique} :
 \begin{equation}
-E = \mathrm{IPC}\, P_{\max}
+E = \frac{\mathrm{IPC}}{P_{\max}}
 \label{eq:eff_energetique}
 \end{equation}
 
@@ -38,3 +38,41 @@ Cette expression est appliqu\'ee \`a toutes les applications, pour chacune des c
 On a conclu qu’en d\'efinissant l’efficacit\'e du projet \`a partir de l’IPC et de la puissance consomm\'ee \`a la fr\'equence maximale, on obtient les r\'esultats attendus. En effet, plus la taille du cache augmente, plus l’IPC s’am\'eliore et, avec un d\'enominateur constant (ou fix\'e), l’efficacit\'e \'energ\'etique augmente pour les deux microprocesseurs.
 
 Par ailleurs, il est important de souligner que, pour la plupart des tailles de cache comparables entre les deux architectures propos\'ees, l’efficacit\'e \'energ\'etique du microprocesseur A15 est inf\'erieure \`a celle du microprocesseur A7.
+
+\subsection{Analyse critique et initiative technique}
+Si l’on s’en tient strictement \`a la m\'etrique impos\'ee par l’\'enonc\'e (\(\mathrm{IPC}/\mathrm{mW}\)), le Cortex-A7 appara\^it comme le plus efficace, ce qui est coh\'erent avec son positionnement \emph{low power}.
+
+Pour cette comparaison, nous fixons explicitement les deux points de r\'ef\'erence suivants issus des simulations Gem5 sur \emph{Dijkstra large} :
+\begin{itemize}
+\item Cortex-A7 : \(\mathrm{IPC}=0.275495\).
+\item Cortex-A15 avec \(L1=32~\mathrm{kB}\) : \(\mathrm{IPC}=1.158855\).
+\end{itemize}
+
+Cependant, en tant que concepteurs syst\`eme, ce r\'esultat doit \^etre nuanc\'e. La m\'etrique \(\mathrm{IPC}/\mathrm{mW}\) normalise par la puissance mais n’int\`egre pas explicitement l’effet de la fr\'equence d’horloge. Or, le Cortex-A15 fonctionne \`a \(2.5\times\) la fr\'equence du Cortex-A7.
+
+Pour obtenir une vision plus r\'ealiste du compromis performance/\'energie, nous introduisons donc le ratio \emph{performance r\'eelle par watt} en \(\mathrm{GIPS}/\mathrm{W}\).
+
+\textbf{1. Performance r\'eelle (GIPS)}
+\[
+\mathrm{GIPS} = \mathrm{IPC}\times f\;(\mathrm{GHz})
+\]
+\[
+\text{A7: }0.275495 \times 1.0 = 0.275495\;\mathrm{GIPS}
+\]
+\[
+\text{A15: }1.158855 \times 2.5 = 2.8971375\;\mathrm{GIPS}
+\]
+Le Cortex-A15 est donc environ \(10.52\times\) plus rapide en d\'ebit absolu.
+
+\textbf{2. Efficacit\'e r\'eelle \((\mathrm{GIPS}/\mathrm{W})\)}
+\[
+\eta_{\text{r\'eelle}} = \frac{\mathrm{GIPS}}{P\;(\mathrm{W})}
+\]
+\[
+\text{A7: }\frac{0.275495}{0.1} = 2.75495\;\mathrm{GIPS/W}
+\]
+\[
+\text{A15: }\frac{2.8971375}{0.5} = 5.794275\;\mathrm{GIPS/W}
+\]
+
+Cette initiative montre que, malgr\'e un avantage apparent de l’A7 en \(\mathrm{IPC}/\mathrm{mW}\), l’A15 d\'elivre une meilleure performance utile par watt lorsque la fr\'equence est prise en compte. En pratique, le choix final d\'epend donc de l’objectif syst\`eme : minimiser la puissance instantan\'ee (A7) ou maximiser le d\'ebit \'energ\'etique global (A15).
