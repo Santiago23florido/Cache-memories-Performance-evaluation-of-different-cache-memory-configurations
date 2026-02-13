@@ -1,12 +1,13 @@
-\subsection{Efficacité surfacique}
+\section{Efficacité surfacique}
 
+\subsection{Paramètres de cache par défaut}
 Observant le fichier \texttt{cache.cfg}, on constate que la capacité totale des données pouvant être stockées dans le cache, sans compter les métadonnées telles que les \emph{tags}, identifiée comme la taille du cache, est de 131072~bytes, soit 128~KiB. De son côté, l’unité minimale chargée depuis la mémoire ou depuis le niveau \texttt{L2} vers le cache correspond à la taille de bloc, qui est de 64~bytes. La configuration standard comporte 2~voies pour le placement des blocs à l’intérieur des ensembles (\emph{sets}). Enfin, la technologie utilisée par défaut est de 0{,}090~$\mu$m, soit 90~nm.
-
+\subsection{Taille des deux coeurs (hors caches L1).}
 Les surfaces proviennent des sorties CACTI (\texttt{cacti/result\_L1\_*}) via la ligne
 \texttt{Cache height x width (mm)}. 
 En supposant les tailles du Tableau~12 : L1I = L1D = 32\,kB (A7) et 32\,kB (A15), on obtient :
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \footnotesize
 \resizebox{\linewidth}{!}{%
@@ -39,6 +40,9 @@ S_{\text{core hors L1}}(A15) &= 2-0{,}06639=1{,}93361~\text{mm}^2.
  Le A7 consacre une fraction beaucoup plus importante de sa surface au L1
 ($\approx 29{,}52\%$) que le A15 ($\approx 3{,}32\%$), ce qui reflète un cœur plus compact à taille de L1 comparable, le poids surfacique est plus élevé sur A7 et aussi Sur le Cortex-A15, la logique complexe (ex\'ecution \emph{Out-of-Order}, renommage, etc.) domine massivement. Les caches L1 sont proportionnellement petits.
 .
+
+\subsection{Surfaces totales du Cortex A7 et du Cortex A15 et l’efficacité surfacique de chaque processeur.}
+
 En disposant d\'ej\`a des conditions relatives \`a la surface du c\oe{}ur (hors cache), il est possible, \`a l’aide de CACTI, de d\'eterminer la surface du cache L2 en configurant les param\`etres de simulation afin de d\'efinir un L2 de 512~kB. De plus, on simule \'egalement avec CACTI afin d’estimer la surface du cache L1 pour l’ensemble de ses dimensions, et ce, pour les deux microprocesseurs.
 
 En appliquant l’\'equation \eqref{eq:surface_systeme}, on obtient la surface totale du syst\`eme :

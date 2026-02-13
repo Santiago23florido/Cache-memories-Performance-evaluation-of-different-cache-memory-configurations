@@ -1,77 +1,94 @@
-\subsection{Impact de la taille des caches L1}
+\section{Impact de la taille des caches L1}
+
+\subsection{Configuration de L1 performances pour le Cortex A7}
+\textbf{Param\`etres de simulation Gem5 utilis\'es (campagne L1, Cortex-A7) :}
+\begin{itemize}
+\item \textbf{Coeur :} \texttt{DerivO3CPU} (profil Cortex-A7).
+\item \textbf{I-L1 (cache/bloc/assoc.) :} \texttt{\{1,2,4,8,16\}kB / 32B / 2}.
+\item \textbf{D-L1 (cache/bloc/assoc.) :} \texttt{\{1,2,4,8,16\}kB / 32B / 2}.
+\item \textbf{L2 (cache/bloc/assoc.) :} \texttt{512kB / 32B / 8}.
+\item \textbf{Pr\'edicteur de branchement :} \texttt{BiModeBP}, \texttt{BTBEntries=256}.
+\item \textbf{Fetch queue :} \texttt{8}.
+\item \textbf{Decode/Issue/Commit :} \texttt{2 / 4 / 2}.
+\item \textbf{RUU/LSQ :} \texttt{2 / 8} (avec \texttt{LQ=8}, \texttt{SQ=8}).
+\end{itemize}
+
+Le paramètre \texttt{fetchQueueSize} implémenté est celui fourni dans le dépôt, tel qu’il apparaît dans le fichier de base distribué. Il convient de préciser qu’il ne correspond pas à la valeur indiquée dans le tableau, mais qu’il s’agit bien de la valeur imposée par le fichier de configuration fourni.
 
 Les Figs. (\ref{fig:dijkstra-l1-perf})-(\ref{fig:dijkstra-l1-branch}) et (\ref{fig:blowfish-l1-perf})-(\ref{fig:blowfish-l1-branch}) présentent l’évolution des performances en fonction de la taille du cache L1 pour dijkstra applications et pour Blowfish applications respectivement. 
 
-\begin{figure}[h]
+\newcommand{\cacheloneplotwidth}{0.33\linewidth}
+
+\begin{figure}[H]
 \centering
-\subfloat[CPI (A7).]{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A7/cpi_bar.png}}
-\subfloat[IPC (A7).]{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A7/ipc_bar.png}}
-\subfloat[Cycles (A7).]{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A7/numCycles_bar.png}}\\
-\subfloat[CPI (A15).]{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A15/cpi_bar.png}}
-\subfloat[IPC (A15).]{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A15/ipc_bar.png}}
-\subfloat[Cycles (A15).]{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A15/numCycles_bar.png}}
+\subfloat[CPI (A7).]{\includegraphics[width=\cacheloneplotwidth]{../dijkstra/plots_L1_A7/cpi_bar.png}}
+\subfloat[IPC (A7).]{\includegraphics[width=\cacheloneplotwidth]{../dijkstra/plots_L1_A7/ipc_bar.png}}
+\subfloat[Cycles (A7).]{\includegraphics[width=\cacheloneplotwidth]{../dijkstra/plots_L1_A7/numCycles_bar.png}}\\
+\subfloat[CPI (A15).]{\includegraphics[width=\cacheloneplotwidth]{../dijkstra/plots_L1_A15/cpi_bar.png}}
+\subfloat[IPC (A15).]{\includegraphics[width=\cacheloneplotwidth]{../dijkstra/plots_L1_A15/ipc_bar.png}}
+\subfloat[Cycles (A15).]{\includegraphics[width=\cacheloneplotwidth]{../dijkstra/plots_L1_A15/numCycles_bar.png}}
 \caption{Dijkstra : performance générale en fonction de la taille du cache L1 (A7 en haut, A15 en bas).}
 \label{fig:dijkstra-l1-perf}
 \end{figure}
 
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-\subfloat{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A7/icache_miss_bar.png}}
-\subfloat{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A7/dcache_miss_bar.png}}
-\subfloat{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A7/l2_miss_bar.png}}\\
-\subfloat{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A15/icache_miss_bar.png}}
-\subfloat{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A15/dcache_miss_bar.png}}
-\subfloat{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A15/l2_miss_bar.png}}
+\subfloat{\includegraphics[width=\cacheloneplotwidth]{../dijkstra/plots_L1_A7/icache_miss_bar.png}}
+\subfloat{\includegraphics[width=\cacheloneplotwidth]{../dijkstra/plots_L1_A7/dcache_miss_bar.png}}
+\subfloat{\includegraphics[width=\cacheloneplotwidth]{../dijkstra/plots_L1_A7/l2_miss_bar.png}}\\
+\subfloat{\includegraphics[width=\cacheloneplotwidth]{../dijkstra/plots_L1_A15/icache_miss_bar.png}}
+\subfloat{\includegraphics[width=\cacheloneplotwidth]{../dijkstra/plots_L1_A15/dcache_miss_bar.png}}
+\subfloat{\includegraphics[width=\cacheloneplotwidth]{../dijkstra/plots_L1_A15/l2_miss_bar.png}}
 \caption{Dijkstra : taux de défauts I-Cache, D-Cache et L2 en fonction de la taille du cache L1 (A7 en haut, A15 en bas).}
 \label{fig:dijkstra-l1-mem}
 \end{figure}
 
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-\subfloat{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A7/bp_cond_mispredict_rate_bar.png}}
-\subfloat{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A7/bp_mispredict_rate_bar.png}}
-\subfloat{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A7/btb_hit_ratio_bar.png}}\\
-\subfloat{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A15/bp_cond_mispredict_rate_bar.png}}
-\subfloat{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A15/bp_mispredict_rate_bar.png}}
-\subfloat{\includegraphics[width=0.32\linewidth]{../dijkstra/plots_L1_A15/btb_hit_ratio_bar.png}}
+\subfloat{\includegraphics[width=\cacheloneplotwidth]{../dijkstra/plots_L1_A7/bp_cond_mispredict_rate_bar.png}}
+\subfloat{\includegraphics[width=\cacheloneplotwidth]{../dijkstra/plots_L1_A7/bp_mispredict_rate_bar.png}}
+\subfloat{\includegraphics[width=\cacheloneplotwidth]{../dijkstra/plots_L1_A7/btb_hit_ratio_bar.png}}\\
+\subfloat{\includegraphics[width=\cacheloneplotwidth]{../dijkstra/plots_L1_A15/bp_cond_mispredict_rate_bar.png}}
+\subfloat{\includegraphics[width=\cacheloneplotwidth]{../dijkstra/plots_L1_A15/bp_mispredict_rate_bar.png}}
+\subfloat{\includegraphics[width=\cacheloneplotwidth]{../dijkstra/plots_L1_A15/btb_hit_ratio_bar.png}}
 \caption{Dijkstra : métriques de prédiction de branchement en fonction de la taille du cache L1 (A7 en haut, A15 en bas).}
 \label{fig:dijkstra-l1-branch}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-\subfloat[CPI (A7).]{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/cpi_bar.png}}
-\subfloat[IPC (A7).]{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/ipc_bar.png}}
-\subfloat[Cycles (A7).]{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/numCycles_bar.png}}\\
-\subfloat[CPI (A15).]{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/cpi_bar.png}}
-\subfloat[IPC (A15).]{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/ipc_bar.png}}
-\subfloat[Cycles (A15).]{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/numCycles_bar.png}}
+\subfloat[CPI (A7).]{\includegraphics[width=\cacheloneplotwidth]{../blowfish/plots_L1_A7/cpi_bar.png}}
+\subfloat[IPC (A7).]{\includegraphics[width=\cacheloneplotwidth]{../blowfish/plots_L1_A7/ipc_bar.png}}
+\subfloat[Cycles (A7).]{\includegraphics[width=\cacheloneplotwidth]{../blowfish/plots_L1_A7/numCycles_bar.png}}\\
+\subfloat[CPI (A15).]{\includegraphics[width=\cacheloneplotwidth]{../blowfish/plots_L1_A15/cpi_bar.png}}
+\subfloat[IPC (A15).]{\includegraphics[width=\cacheloneplotwidth]{../blowfish/plots_L1_A15/ipc_bar.png}}
+\subfloat[Cycles (A15).]{\includegraphics[width=\cacheloneplotwidth]{../blowfish/plots_L1_A15/numCycles_bar.png}}
 \caption{Blowfish : performance générale en fonction de la taille du cache L1 (A7 en haut, A15 en bas).}
 \label{fig:blowfish-l1-perf}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/icache_miss_bar.png}}
-\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/dcache_miss_bar.png}}
-\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/l2_miss_bar.png}}\\
-\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/icache_miss_bar.png}}
-\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/dcache_miss_bar.png}}
-\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/l2_miss_bar.png}}
+\subfloat{\includegraphics[width=\cacheloneplotwidth]{../blowfish/plots_L1_A7/icache_miss_bar.png}}
+\subfloat{\includegraphics[width=\cacheloneplotwidth]{../blowfish/plots_L1_A7/dcache_miss_bar.png}}
+\subfloat{\includegraphics[width=\cacheloneplotwidth]{../blowfish/plots_L1_A7/l2_miss_bar.png}}\\
+\subfloat{\includegraphics[width=\cacheloneplotwidth]{../blowfish/plots_L1_A15/icache_miss_bar.png}}
+\subfloat{\includegraphics[width=\cacheloneplotwidth]{../blowfish/plots_L1_A15/dcache_miss_bar.png}}
+\subfloat{\includegraphics[width=\cacheloneplotwidth]{../blowfish/plots_L1_A15/l2_miss_bar.png}}
 \caption{Blowfish : taux de défauts I-Cache, D-Cache et L2 en fonction de la taille du cache L1 (A7 en haut, A15 en bas).}
 \label{fig:blowfish-l1-mem}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/bp_cond_mispredict_rate_bar.png}}
-\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/bp_mispredict_rate_bar.png}}
-\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A7/btb_hit_ratio_bar.png}}\\
-\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/bp_cond_mispredict_rate_bar.png}}
-\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/bp_mispredict_rate_bar.png}}
-\subfloat{\includegraphics[width=0.32\linewidth]{../blowfish/plots_L1_A15/btb_hit_ratio_bar.png}}
+\subfloat{\includegraphics[width=\cacheloneplotwidth]{../blowfish/plots_L1_A7/bp_cond_mispredict_rate_bar.png}}
+\subfloat{\includegraphics[width=\cacheloneplotwidth]{../blowfish/plots_L1_A7/bp_mispredict_rate_bar.png}}
+\subfloat{\includegraphics[width=\cacheloneplotwidth]{../blowfish/plots_L1_A7/btb_hit_ratio_bar.png}}\\
+\subfloat{\includegraphics[width=\cacheloneplotwidth]{../blowfish/plots_L1_A15/bp_cond_mispredict_rate_bar.png}}
+\subfloat{\includegraphics[width=\cacheloneplotwidth]{../blowfish/plots_L1_A15/bp_mispredict_rate_bar.png}}
+\subfloat{\includegraphics[width=\cacheloneplotwidth]{../blowfish/plots_L1_A15/btb_hit_ratio_bar.png}}
 \caption{Blowfish : métriques de prédiction de branchement en fonction de la taille du cache L1 (A7 en haut, A15 en bas).}
 \label{fig:blowfish-l1-branch}
 \end{figure} 
@@ -100,6 +117,22 @@ Ce constat renforce l’appr\'eciation initiale selon laquelle la classe dominan
 En somme, en tenant compte de l’effet de saturation observ\'e en fonction de la taille du L1, la configuration retenue est de 8~kB. Il s’agit du ``sweet spot'' offrant le meilleur compromis performance/surface pour ce profil architectural, et ce, pour les deux applications.
 
 \input{sections/CacheL1_gains_tables.tex}
+
+\subsection{Configuration de L1 performances pour le Cortex A15}
+\textbf{Param\`etres de simulation Gem5 utilis\'es (campagne L1, Cortex-A15) :}
+\begin{itemize}
+\item \textbf{Coeur :} \texttt{DerivO3CPU} (profil Cortex-A15).
+\item \textbf{I-L1 (cache/bloc/assoc.) :} \texttt{\{2,4,8,16,32\}kB / 64B / 2}.
+\item \textbf{D-L1 (cache/bloc/assoc.) :} \texttt{\{2,4,8,16,32\}kB / 64B / 2}.
+\item \textbf{L2 (cache/bloc/assoc.) :} \texttt{512kB / 64B / 16}.
+\item \textbf{Pr\'edicteur de branchement :} \texttt{LocalBP}, \texttt{BTBEntries=256}.
+\item \textbf{Fetch queue :} \texttt{15}.
+\item \textbf{Decode/Issue/Commit :} \texttt{4 / 8 / 4}.
+\item \textbf{RUU/LSQ :} \texttt{16 / 16} (avec \texttt{LQ=16}, \texttt{SQ=16}).
+
+Le paramètre \texttt{fetchQueueSize} implémenté est celui fourni dans le dépôt, tel qu’il apparaît dans le fichier de base distribué. Il convient de préciser qu’il ne correspond pas à la valeur indiquée dans le tableau, mais qu’il s’agit bien de la valeur imposée par le fichier de configuration fourni.
+
+\end{itemize}
 
 Pour le Cortex-A15, les tendances observ\'ees, une fois l’optimisation du traitement des op\'erations du c\oe{}ur d\'ej\`a mise en place, deviennent plus marqu\'ees : la comparaison de l’IPC entre les deux Cortex (A15 et A7) montre des gains plus \'elev\'es lorsque l’on impl\'emente un L1 de plus grande taille. Dans ces cas, la zone critique s’\'etend typiquement de 2~kB \`a 16~kB, avec une croissance de l’IPC et une augmentation du pourcentage de diminution des pertes sur les donn\'ees. Pour Dijkstra, on observe aussi qu’entre 16~kB et 32~kB, l’augmentation de l’IPC est tr\`es significative, accompagn\'ee d’une diminution notable des \emph{misses} de donn\'ees en cache, ce qui est particuli\`erement important pour Dijkstra compte tenu de la mani\`ere dont les acc\`es m\'emoire se produisent, en lien avec les structures de donn\'ees employ\'ees par l’algorithme.
 

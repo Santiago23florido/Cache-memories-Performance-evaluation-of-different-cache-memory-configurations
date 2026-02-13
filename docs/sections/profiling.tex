@@ -2,8 +2,8 @@
 
 Pour procéder à l’évaluation des configurations de cache pour chacun des algorithmes proposés et analyser leurs performances, il est proposé de réaliser un \emph{profiling} de l’application à l’aide du simulateur gem5. Le \emph{profiling} est essentiel, car il permet de quantifier des éléments du comportement du programme afin de prendre des décisions d’optimisation et de microconception architecturale fondées sur des données, principalement issues de la simulation \cite{Profiling}. Il permet également d’identifier des \emph{hotspots} sur lesquels concentrer la conception et l’optimisation, c’est-à-dire de cibler en priorité les composantes qui contribuent le plus au temps d’exécution. Enfin, il fournit une première approximation de la caractérisation de la charge de travail (\emph{workload}) d’un programme, ce qui facilite l’orientation des choix de conception.
 
-
-\begin{table}[h]
+\subsection{pourcentage de chaque classe d'instructions}
+\begin{table}[H]
 \centering
 \footnotesize
 \setlength{\tabcolsep}{3pt}
@@ -26,7 +26,7 @@ Calcul entier  & 139\,193\,914 [68.2] & 140\,143\,451 [68.2] \\
 \end{table}
 
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \footnotesize
 \setlength{\tabcolsep}{3pt}
@@ -49,7 +49,7 @@ Calcul entier  & 30\,916\,920 [67.3] & 31\,379\,238 [67.2] \\
 \end{table}
 
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \footnotesize
 \setlength{\tabcolsep}{3pt}
@@ -72,7 +72,7 @@ Calcul entier  & 2\,348\,046 [65.5] & 2\,294\,903 [64.3] \\
 \end{table}
 
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \footnotesize
 \setlength{\tabcolsep}{3pt}
@@ -92,6 +92,26 @@ Calcul entier  & 8\,499\,974 [64.4] & 8\,518\,974 [63.1] \\
 \end{tabular}
 }
 \caption{Blowfish large (Cortex-A7 vs Cortex-A15) }
+\end{table}
+
+\begin{table}[H]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{l|c}
+\hline
+\textbf{Métrique} & \textbf{SHA-1} \\
+\hline
+IntAlu (Calcul entier) & 83.52\,\% \\
+MemRead (Lecture) & 11.77\,\% \\
+MemWrite (Écriture) & 4.71\,\% \\
+Float (Flottants) & 0.00\,\% \\
+\hline
+\textit{Profil identifié} & \textit{Compute Bound} \\
+\hline
+\end{tabular}
+\caption{Répartition en pourcentage des classes d’instructions pour SHA-1}
+\label{tab:repartition-pourcentage-sha1}
 \end{table}
 
 Il est important de souligner que, même si le \emph{profiling} montre que les instructions dominantes dans les applications sont des instructions de calcul entier, le pourcentage élevé associé aux opérations mémoire crée néanmoins la nécessité d’évaluer la latence des processus mémoire. L’objectif est de déterminer si, malgré leur caractère non dominant, ces opérations peuvent constituer le goulot d’étranglement de l’application. Pour cela, on propose d’estimer l’effet des \emph{misses} dans les caches L1 et L2, sous la forme d’un coût approximatif en cycles, afin d’évaluer ensuite la part de ces pertes dans le CPI et de conclure si ces résultats sont, ou non, représentatifs par rapport au pourcentage d’instructions liées aux calculs. Il convient de pr\'eciser que le calcul relatif au cache L1 est effectu\'e uniquement \`a partir des \emph{misses} du cache de donn\'ees, car les \emph{misses} du cache d’instructions ne sont pas consid\'er\'es comme suffisamment repr\'esentatifs pour \^etre pris en compte dans l’analyse.
@@ -137,7 +157,7 @@ Enfin, à partir de cela, on estime pour chaque niveau de cache (L1 et L2) le co
 \end{equation}
 
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \footnotesize
 \setlength{\tabcolsep}{3pt}
@@ -156,7 +176,7 @@ largedijkstraA15 & 0.874 & 9.99\% & 9.80\% & 0.19\% \\
 \caption{Contribution estimée de la pénalité mémoire au CPI pour les exécutions de Dijkstra}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \footnotesize
 \setlength{\tabcolsep}{3pt}
@@ -175,8 +195,10 @@ bfA15\_large & 0.668 & 5.30\% & 2.56\% & 2.75\% \\
 \caption{Contribution estimée de la pénalité mémoire au CPI pour les exécutions de Blowfish}
 \end{table}
 
-Les r\'esultats du \emph{profiling}, combin\'es avec le co\^ut des op\'erations m\'emoire dans les deux applications, indiquent que le goulot d’\'etranglement principal se situe davantage du c\^ot\'e du c\oe{}ur (fen\^etre OoO/ROB, files m\'emoire, d\'ependances et contr\^ole de flux). Par cons\'equent, une micro-architecture disposant de davantage d’ALU enti\`eres, ou d’un parall\'elisme accru sur les op\'erations enti\`eres, peut apporter le gain le plus important. Les branchements repr\'esentent \'egalement une part notable : restructurer les boucles ou r\'eduire les sauts peut donc limiter les p\'enalit\'es de contr\^ole.
+\subsection{Catégorie d'instructions que nécessiterait une amélioration}
+Le profiling indique que le goulot d’étranglement est d’abord côté cœur (OoO/ROB, dépendances, contrôle) : augmenter le parallélisme et le nombre d’ALU entières apporte le gain principal. Ensuite, si la mémoire domine, améliorer la localité et l’organisation des données réduit les misses et la latence des loads/stores. Enfin, la part de branchements justifie de restructurer les boucles et de limiter les sauts pour réduire les pénalités de contrôle.
 
+\subsection{Similitudes/divergences comportementales entre dijkstra, BlowFish, SSCA2-BCS, SHA-1 et le produit de polynômes}
 On observe aussi qu’apr\`es l’am\'elioration des unit\'es de calcul et la capacit\'e \`a exploiter davantage le parall\'elisme au niveau des instructions, lorsque le CPI diminue fortement, les \emph{misses} de cache deviennent plus significatifs. Dans ce contexte, la mise en \oe{}uvre d’un design r\'eduisant les \emph{misses} de cache devient plus int\'eressante pour une impl\'ementation ult\'erieure.
 
 De plus, il convient de consid\'erer que, dans le cas de Dijkstra, en raison de la nature de l’algorithme et des structures de donn\'ees qu’il emploie, les branchements ont un effet important. Cela sugg\`ere qu’une am\'elioration du pr\'edicteur de branchement, pour cette application et pour ces configurations, pourrait \'egalement repr\'esenter un gain significatif en IPC.
