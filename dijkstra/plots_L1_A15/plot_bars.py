@@ -1,8 +1,4 @@
 #!/usr/bin/env python3
-"""
-Genera graficos de barras (uno por variable) desde el CSV en este directorio.
-Si hay mas de un conjunto de datos, crea barras agrupadas por L1_taille.
-"""
 
 from __future__ import annotations
 

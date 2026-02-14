@@ -1,12 +1,3 @@
-#!/usr/bin/env python3
-"""
-Extrae métricas desde stats.txt de cada run listado en el CSV resultats_*.csv
-(generado por los scripts de simulación) y produce un CSV enriquecido con:
-- cpi, ipc, numCycles
-- icache/dcache/l2 miss rate
-- branch predictor: BTB hit ratio y tasa de mispredicción condicional
-"""
-
 from __future__ import annotations
 
 import argparse

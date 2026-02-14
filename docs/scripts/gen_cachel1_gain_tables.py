@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-"""
-Genera tablas LaTeX de ganancias relativas:
-- IPC + I-Cache + D-Cache
-para Dijkstra y Blowfish (A7 y A15), a partir de metrics_*.csv.
-"""
-
 from __future__ import annotations
 
 import argparse
